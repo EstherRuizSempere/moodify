@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+:root {
+  --primary-color: #fef9e9;
+  --secondary-color: #f8e4c5;
+  --complementary-color: #f9ccc8;
+  --complementary-medium-dark: #f2bdcb;
+  --medium-dark-color: #dcb18b;
+  --dark-color: #241d17;
+  --complementary-medium-dark-hover: #ef6589;
+
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Zain", sans-serif;
+}

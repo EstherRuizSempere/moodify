@@ -1,0 +1,80 @@
+.side-bar {
+  font-weight: 400;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 400px;
+  text-align: justify;
+  align-items: start;
+}
+
+.divisor {
+  background: var(--medium-dark-color);
+  margin-bottom: 15px;
+}
+
+
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+i {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+i.heart {
+  color: #e03636;
+}
+
+i.smile {
+  color: #794f5a;
+}
+
+a {
+  transition: transform 0.3s ease;
+}
+
+a:hover {
+  transform: scale(1.1);
+  color: var(--complementary-medium-dark-hover);
+  font-style: italic;
+}
+
+a.active {
+  color: var(--complementary-medium-dark-hover);
+}
+
+
+/* Media queries para hacer el sidebar responsivo */
+@media (max-width: 768px) {
+  .side-bar {
+    flex-direction: row;
+    height: auto;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .side-bar img {
+    max-height: 40px;
+    width: auto;
+  }
+  .top-list-section,
+  .medium-list-section,
+  .bottom-list-section, .divisor {
+    display: none;
+  }
+
+
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+
+}
+
