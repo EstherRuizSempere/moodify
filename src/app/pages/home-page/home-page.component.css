@@ -1,0 +1,8 @@
+.home-page-sections{
+  display: flex;
+  flex-direction: column;
+}
+.divisor {
+  background: var(--complementary-medium-dark-hover);
+  opacity: 30%;
+}

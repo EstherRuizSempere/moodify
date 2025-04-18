@@ -1,0 +1,59 @@
+<!-- track-list-item.component.html -->
+<div class="track-item" [ngClass]="{'hovered': isHovered, 'playing': isPlaying}" (mouseenter)="isHovered = true"
+     (mouseleave)="isHovered = false">
+  <div class="track-number-play">
+    @if (!isHovered && !isPlaying) {
+      <span class="track-number">{{ index + 1 }}</span>
+    }
+    @if (isHovered && !isPlaying) {
+      <button class="play-button" (click)="playTrack()">
+        <i class="fas fa-play"></i>
+      </button>
+    }
+    @if (isPlaying) {
+      <button class="play-button" (click)="playTrack()">
+        @if (isPlaying) {
+          <div class="equalizer">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        }
+      </button>
+    }
+
+
+  </div>
+
+  <div class="track-image">
+    <img  src="assets/images/holiday-brain.png" [alt]="track.title">
+  </div>
+
+  <div class="track-info">
+    <h3 class="track-title" [ngClass]="{'text-playing': isPlaying}">{{ track.title }}</h3>
+    <p class="track-artist">{{ track.artist }}</p>
+  </div>
+
+  <div class="track-album d-none d-md-block">
+    <p>{{ track.album }}</p>
+  </div>
+
+  <div class="track-date d-none d-lg-block">
+    <p>{{ track.playedAt | date:'shortDate' }}</p>
+  </div>
+
+  <div class="track-duration">
+    <span>{{ formatDuration(track.duration) }}</span>
+  </div>
+
+  <div class="track-actions">
+    <button class="like-button" [ngClass]="{'liked': track.isLiked}" (click)="toggleLike()">
+      <i class="fas" [ngClass]="track.isLiked ? 'fa-heart' : 'fa-heart'"></i>
+    </button>
+    @if (isHovered) {
+      <button class="more-button">
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+    }
+  </div>
+</div>

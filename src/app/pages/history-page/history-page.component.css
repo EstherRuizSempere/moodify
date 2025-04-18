@@ -1,0 +1,254 @@
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.history-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--medium-dark-color);
+  border: 2px solid var(--medium-dark-color);
+  width: 300px;
+  text-align: center;
+  border-radius: 20px;
+  background: var(--primary-color);
+  box-shadow: 0 6px 16px var(--medium-dark-color);
+}
+
+
+.history-filters {
+  display: flex;
+  gap: 15px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--complementary-medium-dark);
+}
+
+.search-box input {
+  padding: 8px 8px 8px 35px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--dark-color);
+  width: 200px;
+  font-size: 0.9rem;
+}
+
+.search-box input::placeholder {
+  color: var(--dark-color);
+}
+
+.search-box input:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.time-filter select {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--dark-color);
+  font-size: 0.9rem;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.time-filter select:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.history-list-header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px 10px 16px;
+  border-bottom: 1px solid rgba(115, 57, 7, 0.2);
+  margin-bottom: 10px;
+  color: var(--dark-color);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.header-number {
+  width: 30px;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.header-title {
+  flex-grow: 1;
+  margin-right: 15px;
+  margin-left: 55px; /* Para alinear con la imagen del track */
+}
+
+.header-album {
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.header-date {
+  flex-shrink: 0;
+  margin-right: 70px;
+  font-size: 0.8rem;
+}
+
+.header-duration {
+  width: 45px;
+  margin-right: 10px;
+}
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--complementary-medium-dark-hover);
+  opacity: 0.3;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+  color: var(--dark-color);
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--dark-color);
+  opacity: 0.7;
+}
+
+@media (max-width: 992px) {
+  .history-header {
+    margin-bottom: 20px;
+  }
+
+  .history-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .history-filters {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-title {
+    margin-left: 20px;
+  }
+
+  .history-list-header {
+    padding: 0 5px 10px 5px;
+  }
+
+  .header-album {
+    width: 120px;
+  }
+
+  .header-date {
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-box input {
+    width: 130px;
+  }
+
+  .history-list-header {
+    padding: 0 5px 10px 5px;
+    font-size: 0.9rem;
+  }
+
+  .header-title {
+    margin-left: 10px;
+  }
+
+  .header-number {
+    width: 20px;
+    margin-right: 5px;
+  }
+
+  .header-album {
+    width: 80px;
+  }
+
+  .header-duration {
+    width: 30px;
+    margin-right: 5px;
+  }
+
+  .empty-state {
+    padding: 40px 10px;
+  }
+
+  .empty-icon {
+    font-size: 2.5rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Agregar regla para pantallas muy pequeñas */
+@media (max-width: 420px) {
+  .history-filters {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .search-box, .time-filter {
+    width: 100%;
+  }
+
+  .search-box input, .time-filter select {
+    width: 100%;
+  }
+
+  .history-list-header {
+    font-size: 0.8rem;
+  }
+
+  .header-title {
+    margin-left: 5px;
+    flex-grow: 2;
+  }
+
+  .header-album {
+    display: none;
+  }
+}

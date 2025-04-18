@@ -1,0 +1,13 @@
+.main-title{
+  display: flex;
+  align-items: center;
+}
+
+.main-title h1{
+  font-size: 4.5rem;
+}
+
+.img-container{
+  width: 150px;
+  margin-right: 20px;
+}

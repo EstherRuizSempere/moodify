@@ -1,1 +1,62 @@
-<p>history-page works!</p>
+<div class="history-container">
+  <div class="history-header">
+    <h1>Historial de reproducción</h1>
+    <div class="history-filters">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          placeholder="Buscar en el historial"
+          [(ngModel)]="searchTerm"
+          (input)="filterTracks()">
+      </div>
+      <div class="time-filter">
+        <select [(ngModel)]="timeFilter" (change)="filterTracks()">
+          <option value="all">Todo el tiempo</option>
+          <option value="today">Hoy</option>
+          <option value="week">Esta semana</option>
+          <option value="month">Este mes</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-list-header">
+    <div class="header-number">#</div>
+    <div class="header-title">TÍTULO</div>
+    <div class="header-album d-none d-md-block">ÁLBUM</div>
+    <div class="header-date d-none d-lg-block">REPRODUCIDO EL</div>
+    <div class="header-duration">
+      <i class="far fa-clock"></i>
+    </div>
+  </div>
+
+  <!--  track track.id como identificador unico, puedo cambair la propiedad y luego atrapo el index para obtener el indice-->
+  <div class="track-list">
+    @for (track of filteredTracks; track track.id; let i = $index) {
+
+      <app-list-song
+        [track]="track"
+        [index]="i"
+        [isPlaying]="currentlyPlayingId === track.id"
+        (play)="onPlayTrack($event)"
+        (like)="onLikeTrack($event)">
+      </app-list-song>
+    }
+  </div>
+
+  @if (filteredTracks.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-history"></i>
+      </div>
+      <h3>No hay canciones en tu historial</h3>
+      @if (searchTerm) {
+        <p>No se encontraron resultados para "{{ searchTerm }}"</p>
+      }
+      @if (!searchTerm) {
+        <p>¡Escucha algunas canciones para verlas aquí!</p>
+      }
+    </div>
+  }
+</div>

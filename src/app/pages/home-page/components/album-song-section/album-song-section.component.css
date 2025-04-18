@@ -1,0 +1,35 @@
+.albums-container {
+  padding: 20px 0;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--medium-dark-color);
+  padding: 5px;
+  border: 2px solid var(--medium-dark-color);
+  width: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background: var(--primary-color);
+  box-shadow: 0 6px 16px var(--medium-dark-color);
+
+}
+
+.albums-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .albums-grid {
+    justify-content: space-around;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+}
