@@ -1,0 +1,86 @@
+[
+  {
+    "id": 0,
+    "name": "Agradecidx",
+    "description": "A veces la vida no es perfecta, pero siempre hay algo por lo que estar agradecidx. Hoy, simplemente, te sientes afortunidx por lo que tienes. 🙏🏻✨",
+    "image": "assets/images/emotions/Agradecido.png",
+    "alt": "imagen estado de ánimo agradecido/a"
+  },
+  {
+    "id": 1,
+    "name": "Amadx",
+    "description": "El amor está en el aire, o al menos esa sensación de calidez que te da saber que alguien te quiere. Hoy, todo está bien en tu mundo. 🧡🥰",
+    "image": "assets/images/emotions/Amado.png",
+    "alt": "imagen estado de ánimo amado/a"
+  },
+  {
+    "id": 2,
+    "name": "Ansiosx",
+    "description": "Las cosas pueden parecer abrumadoras, pero lo importante es que lo estás manejando, aunque a veces el estrés te gane. ¡Respira, todo pasa! 😰💨",
+    "image": "assets/images/emotions/Ansioso.png",
+    "alt": "imagen estado de ánimo ansioso/a"
+  },
+  {
+    "id": 3,
+    "name": "Cansadx",
+    "description": "Hoy ha sido un día largo, y tu cuerpo te lo recuerda. Necesitas descansar, pero por ahora, sigues adelante con lo que puedes. 🛏️😴",
+    "image": "assets/images/emotions/Cansado.png",
+    "alt": "imagen estado de ánimo cansado/a"
+  },
+  {
+    "id": 4,
+    "name": "Enfadadx",
+    "description": "A veces, las cosas no salen como esperabas, y la frustración se apodera de ti. Pero no te preocupes, este sentimiento pasará. 😡💢",
+    "image": "assets/images/emotions/Enfadado.png",
+    "alt": "imagen estado de ánimo enfadado/a"
+  },
+  {
+    "id": 5,
+    "name": "Feliz",
+    "description": "Hoy te has levantado con una sonrisa. Las cosas marchan bien, y aunque no todo sea perfecto, te sientes en paz y contentx. 😀🌞",
+    "image": "assets/images/emotions/Feliz.png",
+    "alt": "imagen estado de ánimo feliz"
+  },
+  {
+    "id": 6,
+    "name": "Frustradx",
+    "description": "Es una de esas jornadas en las que todo parece ir mal, pero en lugar de rendirte, sabes que esto también pasará. Paciencia. 😮‍💨⌛",
+    "image": "assets/images/emotions/Frustrado.png",
+    "alt": "imagen estado de ánimo frustrado/a"
+  },
+  {
+    "id": 7,
+    "name": "Fuerte",
+    "description": "Hoy te sientes imparable, como si pudieras con todo. La vida no te intimida, y sabes que, pase lo que pase, seguirás adelante. 💪🏻🚀",
+    "image": "assets/images/emotions/Fuerte.png",
+    "alt": "imagen estado de ánimo fuerte"
+  },
+  {
+    "id": 8,
+    "name": "Motivadx",
+    "description": "Sientes esa chispa que te impulsa a dar lo mejor de ti. Estás listo/a para afrontar cualquier reto con energía y determinación. ⚡🔥⚡🌩️💥",
+    "image": "assets/images/emotions/Motivado.png",
+    "alt": "imagen estado de ánimo motivado/a"
+  },
+  {
+    "id": 9,
+    "name": "Normal",
+    "description": "Hoy no hay grandes altibajos. Todo está en su lugar, y aunque no sea un día espectacular, te sientes cómodo/a con lo que está pasando. 🙂👌🏻",
+    "image": "assets/images/emotions/Normal.png",
+    "alt": "imagen estado de ánimo normal"
+  },
+  {
+    "id": 10,
+    "name": "Triste",
+    "description": "A veces, las emociones se nublan y te cuesta ver el lado positivo. Pero está bien sentirse triste de vez en cuando; es parte de la montaña rusa de la vida. ",
+    "image": "assets/images/emotions/Triste.png",
+    "alt": "imagen estado de ánimo triste"
+  },
+  {
+    "id": 11,
+    "name": "Vacaciones",
+    "description": "Es el momento perfecto para desconectar y dejar atrás el estrés. Un respiro de todo lo que te rodea, donde solo importa relajarse y disfrutar. 🏖️🌴",
+    "image": "assets/images/emotions/Vacaciones.png",
+    "alt": "imagen estado de ánimo vacaciones"
+  }
+]

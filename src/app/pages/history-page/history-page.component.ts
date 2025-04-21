@@ -137,12 +137,12 @@ export class HistoryPageComponent implements OnInit {
     }
   }
 
-  onLikeTrack(track: Track) {
+  onLikeTrack(trackItem: Track) {
     //Tengo que actualizar el estado liked en mi back
-    console.log(`💕Super like para: ` + track.title);
+    console.log(`💕Super like para: ` + trackItem.title);
 
     //Actualizar localmente para la demostración
-    const index = this.historyTracks.findIndex(track => track.id === track.id);
+    const index = this.historyTracks.findIndex(track => track.id === trackItem.id);
     if (index !== -1) {
       this.historyTracks[index].isLiked = !this.historyTracks[index].isLiked;
       //refresco la lista filtrada:
