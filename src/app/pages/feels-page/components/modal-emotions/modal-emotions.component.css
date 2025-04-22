@@ -13,6 +13,7 @@
   animation: fadeInBackdrop 0.3s ease;
 }
 
+/*animación para que el fondo aparezca de forma gradual*/
 @keyframes fadeInBackdrop {
   from { opacity: 0; }
   to { opacity: 1; }

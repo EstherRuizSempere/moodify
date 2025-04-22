@@ -12,12 +12,15 @@ import {EmotionModalServiceService} from '../../../../../services/emotion-modal-
   styleUrl: './moods.component.css'
 })
 export class MoodsComponent {
+  // input para recibir la emoción desde el componente padre
   @Input() mood!: Emotions;
   isHovered = false;
 
+  // inyeccion del servicio para abrir el modal
   constructor(private modalService: EmotionModalServiceService) {
   }
 
+  // metodo para abrir el modal cuando hago click
   openEmotionModal() {
     this.modalService.openModal(this.mood);
   }
