@@ -1,0 +1,161 @@
+.emotion-card {
+  width: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(115, 57, 7, 0.3);
+  transition: all 0.3s ease;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.emotion-card:hover, .emotion-card.hovered {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(115, 57, 7, 0.4);
+}
+
+.emotion-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--medium-dark-color);
+}
+
+.emotion-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.emotion-card:hover .emotion-image, .emotion-card.hovered .emotion-image {
+  transform: scale(1.05);
+}
+
+.explore-button-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.explore-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  animation: scaleIn 0.3s forwards;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.7); }
+  to { transform: scale(1); }
+}
+
+.explore-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.explore-button i {
+  color: var(--complementary-medium-dark);
+  font-size: 20px;
+}
+
+.emotion-info {
+  padding: 15px;
+}
+
+.emotion-title {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.emotion-description {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--dark-color);
+  opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .emotion-card {
+    width: 180px;
+  }
+
+  .emotion-image-container {
+    height: 180px;
+  }
+
+  .explore-button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .emotion-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .emotion-card {
+    width: 150px;
+    margin: 10px;
+  }
+
+  .emotion-image-container {
+    height: 150px;
+  }
+
+  .emotion-info {
+    padding: 12px;
+  }
+
+  .emotion-title {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .emotion-description {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .explore-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .explore-button i {
+    font-size: 18px;
+  }
+}

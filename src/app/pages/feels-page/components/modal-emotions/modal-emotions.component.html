@@ -1,0 +1,24 @@
+@if (isOpen) {
+
+
+  <div class="emotion-modal-backdrop" (click)="closeModal($event)">
+    <div class="emotion-modal-content">
+      <button class="modal-close-button" (click)="closeModal($event)">
+        <i class="fa fa-times"></i>
+      </button>
+
+      <div class="modal-image-container">
+        <img [src]="mood?.image" [alt]="mood?.alt" class="modal-image">
+      </div>
+
+      <div class="modal-info">
+        <h2 class="modal-title">{{ mood?.name }}</h2>
+        <div class="modal-description">
+          <p>{{ mood?.description }}</p>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+}

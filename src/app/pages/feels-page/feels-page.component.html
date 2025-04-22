@@ -1,1 +1,13 @@
-<p>feels-page works!</p>
+<div class="emotions-section">
+  <div class="section-header">
+    <h2 class="section-title">Moods</h2>
+    <p>sdkjfgdslkjagkjamalmdsmg</p>
+  </div>
+
+  <div class="emotions-container">
+    @for (mood of datosMoods; track mood.id) {
+      <app-moods [mood]="mood"/>
+    }
+  </div>
+  <app-modal-emotions />
+</div>

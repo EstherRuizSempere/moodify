@@ -1,0 +1,18 @@
+<div class="emotion-card" [ngClass]="{'hovered': isHovered}" (mouseenter)="isHovered = true"
+     (mouseleave)="isHovered = false">
+
+  <div class="emotions-image-container">
+    <img [src]="mood.image" [alt]="mood.alt" class="emotion-image">
+    @if (isHovered) {
+      <div class="explore-button-overlay" (click)="openEmotionModal()">
+        <button class="explore-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    }
+  </div>
+  <div class="emotion-info">
+    <h3 class="emotion-title">{{ mood.name }}</h3>
+    <p class="emotion-description">{{ mood.description }}</p>
+  </div>
+</div>
