@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ListSongComponent, Track} from '../../shared/list-song/list-song.component';
-import {FormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ListSongComponent } from '../../shared/list-song/list-song.component';
+import { FormsModule } from '@angular/forms';
+import { Track } from '../../interfaces/track';
+import { TrackService } from '../../../services/track.service';
+import { TrackPlayerService } from '../../../services/track-player.service';
 
 @Component({
   selector: 'app-history-page',
@@ -19,77 +22,47 @@ export class HistoryPageComponent implements OnInit {
   searchTerm: string = '';
   timeFilter: string = 'all';
 
-  constructor() {
-  }
+  constructor(
+    private trackService: TrackService,
+    private trackPlayerService: TrackPlayerService
+  ) { }
 
   ngOnInit() {
-    //Tengo que implementar para obtener los datos del historial desde el servicio
     this.loadTrackData();
-    this.filterTracks();
+
+    // Suscribirse al track actual y su estado de reproducción
+    this.trackPlayerService.currentTrack$.subscribe(track => {
+      if (track) {
+        this.currentlyPlayingId = track.id;
+      } else {
+        this.currentlyPlayingId = null;
+      }
+    });
+
+    // Suscribirse a cambios en el estado de reproducción
+    this.trackPlayerService.isPlaying$.subscribe(isPlaying => {
+      // Si no está reproduciendo, podríamos querer actualizar algo en la UI
+      if (!isPlaying) {
+        // Opcional: Hacer algo cuando se pausa la reproducción
+      }
+    });
   }
 
   loadTrackData() {
-    const now = new Date();
-    const yesterday = new Date(now);
-    yesterday.setDate(yesterday.getDate() - 1);
-    const lastWeek = new Date(now);
-    lastWeek.setDate(lastWeek.getDate() - 7);
-
-    this.historyTracks = [
-      {
-        id: '1',
-        title: 'Canción romántica con un título muy largo que podría truncarse',
-        artist: 'Artista Famoso',
-        album: 'Álbum Increíble',
-        imageUrl: 'assets/album-placeholder.jpg',
-        duration: 187,
-        playedAt: now,
-        isLiked: true
+    this.trackService.getData().subscribe({
+      next: (tracks) => {
+        this.historyTracks = tracks.map(track => ({
+          ...track,
+          playedAt: track.playedAt || new Date() // Si no tiene playedAt, asignamos la fecha actual
+        }));
+        this.filterTracks();
       },
-      {
-        id: '2',
-        title: 'Título más corto',
-        artist: 'Otro Artista',
-        album: 'Otro Álbum',
-        imageUrl: 'assets/album-placeholder.jpg',
-        duration: 225,
-        playedAt: yesterday,
-        isLiked: false
-      },
-      {
-        id: '3',
-        title: 'Canción Alegre',
-        artist: 'Grupo Musical',
-        album: 'Álbum de Verano',
-        imageUrl: 'assets/album-placeholder.jpg',
-        duration: 176,
-        playedAt: lastWeek,
-        isLiked: true
-      },
-      {
-        id: '4',
-        title: 'Melodía Instrumental',
-        artist: 'Pianista Famoso',
-        album: 'Colección de Piano',
-        imageUrl: 'assets/album-placeholder.jpg',
-        duration: 304,
-        playedAt: yesterday,
-        isLiked: false
-      },
-      {
-        id: '5',
-        title: 'Canción Nostálgica',
-        artist: 'Cantante Vintage',
-        album: 'Éxitos del Pasado',
-        imageUrl: 'assets/album-placeholder.jpg',
-        duration: 254,
-        playedAt: now,
-        isLiked: true
+      error: (error) => {
+        console.error('Error al cargar las canciones:', error);
       }
-    ];
+    });
   }
 
-  //Filtros->
   filterTracks(): void {
     let filtered = [...this.historyTracks];
 
@@ -97,7 +70,7 @@ export class HistoryPageComponent implements OnInit {
     if (this.searchTerm.trim()) {
       const term = this.searchTerm.toLowerCase();
       filtered = filtered.filter(track =>
-        track.title.toLowerCase().includes(term) ||
+        track.name.toLowerCase().includes(term) ||
         track.artist.toLowerCase().includes(term) ||
         track.album.toLowerCase().includes(term)
       );
@@ -107,6 +80,7 @@ export class HistoryPageComponent implements OnInit {
     const now = new Date();
     if (this.timeFilter === 'today') {
       filtered = filtered.filter(track => {
+        if (!track.playedAt) return false;
         const trackDate = new Date(track.playedAt);
         return trackDate.getDate() === now.getDate() &&
           trackDate.getMonth() === now.getMonth() &&
@@ -115,40 +89,38 @@ export class HistoryPageComponent implements OnInit {
     } else if (this.timeFilter === 'week') {
       const weekAgo = new Date(now);
       weekAgo.setDate(weekAgo.getDate() - 7);
-      filtered = filtered.filter(track => new Date(track.playedAt) >= weekAgo);
+      filtered = filtered.filter(track =>
+        track.playedAt ? new Date(track.playedAt) >= weekAgo : false
+      );
     } else if (this.timeFilter === 'month') {
       const monthAgo = new Date(now);
       monthAgo.setMonth(monthAgo.getMonth() - 1);
-      filtered = filtered.filter(track => new Date(track.playedAt) >= monthAgo);
+      filtered = filtered.filter(track =>
+        track.playedAt ? new Date(track.playedAt) >= monthAgo : false
+      );
     }
 
     this.filteredTracks = filtered;
   }
 
-  onPlayTrack(track: Track) {
-// Si la canción clickeada es la misma que está sonando actualmente, la pausamos
-    if (this.currentlyPlayingId === track.id) {
-      this.currentlyPlayingId = null; // Establecer a null indica que no hay canción reproduciéndose
-      console.log(`⏸️ Pausando: ${track.title}`);
-    } else {
-      // Si es una canción diferente o la misma que estaba pausada, la reproducimos
-      this.currentlyPlayingId = track.id;
-      console.log(`▶️ Reproduciendo: ${track.title}`);
+  onPlayTrack(event: any) {
+    // Utiliza el servicio TrackPlayerService para reproducir
+    const track = this.historyTracks.find(t => t.id === event.id);
+    if (track) {
+      this.trackPlayerService.playTrack(track);
     }
   }
 
-  onLikeTrack(trackItem: Track) {
-    //Tengo que actualizar el estado liked en mi back
-    console.log(`💕Super like para: ` + trackItem.title);
+  onLikeTrack(event: any) {
+    console.log(`💕Super like para: ` + event.name);
 
-    //Actualizar localmente para la demostración
-    const index = this.historyTracks.findIndex(track => track.id === trackItem.id);
-    if (index !== -1) {
-      this.historyTracks[index].isLiked = !this.historyTracks[index].isLiked;
-      //refresco la lista filtrada:
-      this.filterTracks();
+    // Busca la canción en el historial
+    const track = this.historyTracks.find(t => t.id === event.id);
+    if (track) {
+      // Utiliza el servicio TrackPlayerService para dar like
+      this.trackPlayerService.toggleLike(track);
+      // Actualiza el historial para reflejar el cambio
+      this.loadTrackData();
     }
   }
-
-  protected readonly indexedDB = indexedDB;
 }

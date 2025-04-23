@@ -1,17 +1,21 @@
-<div class="album-card" [ngClass]="{'hovered': isHovered}" (mouseenter)="isHovered = true"
+<div class="album-card" [ngClass]="{'hovered': isHovered, 'playing': isPlaying}" (mouseenter)="isHovered = true"
      (mouseleave)="isHovered = false">
   <div class="album-image-container">
-    <img [src]="album.coverUrl" [alt]="album.title + ' cover'" class="album-image">
-    @if (isHovered) {
+    <img [src]="track.imageUrl" [alt]="track.name + ' cover'" class="album-image">
+    @if (isHovered || isPlaying) {
       <div class="play-button-overlay" (click)="playAlbum()">
         <button class="play-button">
-          <i class="fas fa-play"></i>
+          @if (isPlaying) {
+            <i class="fas fa-pause"></i>
+          } @else {
+            <i class="fas fa-play"></i>
+          }
         </button>
       </div>
     }
   </div>
   <div class="album-info">
-    <h3 class="album-title">{{ album.title }}</h3>
-    <p class="album-artist">{{ album.artist }}</p>
+    <h3 class="album-title" [ngClass]="{'text-playing': isPlaying}">{{ track.name }}</h3>
+    <p class="album-artist">{{ track.artist }}</p>
   </div>
 </div>

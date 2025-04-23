@@ -1,0 +1,83 @@
+[
+  {
+    "id": "1",
+    "name": "São Paulo",
+    "artist": "The Weeknd & Anitta",
+    "album": "The Idol",
+    "imageUrl": "assets/songs-image/sao-paulo.png",
+    "durationMs": 329000,
+    "songUrl": "assets/songs/sao-paulo.MP3"
+  },
+  {
+    "id": "2",
+    "name": "Goodbye",
+    "artist": "Ramsey",
+    "album": "Arcane OST",
+    "imageUrl": "assets/songs-image/goodbye.png",
+    "durationMs": 351000,
+    "songUrl": "assets/songs/goodbye.MP3"
+  },
+  {
+    "id": "3",
+    "name": "Rewake",
+    "artist": "Lisa",
+    "album": "Solo Leveling",
+    "imageUrl": "assets/songs-image/rewake.png",
+    "durationMs": 312000,
+    "songUrl": "assets/songs/rewake.MP3"
+  },
+  {
+    "id": "4",
+    "name": "Bite Marks",
+    "artist": "League of Legends",
+    "album": "League of Legends OST",
+    "imageUrl": "assets/songs-image/bite-marks.png",
+    "durationMs": 310000,
+    "songUrl": "assets/songs/bite-marks.MP3"
+  },
+  {
+    "id": "5",
+    "name": "Suzume",
+    "artist": "Radwimps",
+    "album": "Suzume OST",
+    "imageUrl": "assets/songs-image/suzume.png",
+    "durationMs": 355000,
+    "songUrl": "assets/songs/suzume.MP3"
+  },
+  {
+    "id": "6",
+    "name": "Solo Leveling Song Level",
+    "artist": "Various Artists",
+    "album": "Solo Leveling OST",
+    "imageUrl": "assets/songs-image/LEveL.png",
+    "durationMs": 302000,
+    "songUrl": "assets/songs/LEveL.MP3"
+  },
+  {
+    "id": "7",
+    "name": "Dark Aria Lv.2",
+    "artist": "Hiroyuki Sawano",
+    "album": "Solo Leveling",
+    "imageUrl": "assets/songs-image/lv2.png",
+    "durationMs": 223000,
+    "songUrl": "assets/songs/lv2.MP3"
+  },
+  {
+    "id": "8",
+    "name": "Idol",
+    "artist": "YOASOBI",
+    "album": "Oshi no Ko",
+    "imageUrl": "assets/songs-image/yaosabi.png",
+    "durationMs": 345000,
+    "songUrl": "assets/songs/yaosabi.MP3"
+  },
+  {
+    "id": "9",
+    "name": "Like JENNIE",
+    "artist": "Jennie",
+    "album": "La más top",
+    "imageUrl": "assets/songs-image/like-jennie.png",
+    "durationMs": 204000,
+    "songUrl": "assets/songs/like-jennie.MP3"
+  }
+]

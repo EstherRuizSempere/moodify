@@ -20,16 +20,14 @@
         }
       </button>
     }
-
-
   </div>
 
   <div class="track-image">
-    <img  src="assets/images/holiday-brain.png" [alt]="track.title">
+    <img [src]="track.imageUrl" [alt]="track.name">
   </div>
 
   <div class="track-info">
-    <h3 class="track-title" [ngClass]="{'text-playing': isPlaying}">{{ track.title }}</h3>
+    <h3 class="track-title" [ngClass]="{'text-playing': isPlaying}">{{ track.name }}</h3>
     <p class="track-artist">{{ track.artist }}</p>
   </div>
 
@@ -42,7 +40,7 @@
   </div>
 
   <div class="track-duration">
-    <span>{{ formatDuration(track.duration) }}</span>
+    <span>{{ formatDuration(track.durationMs) }}</span>
   </div>
 
   <div class="track-actions">
@@ -50,9 +48,9 @@
       <i class="fas" [ngClass]="track.isLiked ? 'fa-heart' : 'fa-heart'"></i>
     </button>
     @if (isHovered) {
-      <button class="more-button">
-        <i class="fas fa-ellipsis-h"></i>
-      </button>
+<!--      <button class="more-button">-->
+<!--        <i class="fas fa-ellipsis-h"></i>-->
+<!--      </button>-->
     }
   </div>
 </div>
