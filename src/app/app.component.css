@@ -36,7 +36,7 @@
   overflow-y: auto;
   background-color: var(--secondary-color);
   padding: 2rem;
-  box-shadow: 0 5px 10px 1px rgba(115, 57, 7, 0.59);
+  /*box-shadow: 0 5px 10px 1px rgba(115, 57, 7, 0.59);*/
   margin-bottom: 15px;
   border-radius: 20px;
   min-height: 0;
