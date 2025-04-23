@@ -1,34 +1,37 @@
 <section class="side-bar">
-  <a routerLink="/"><img src="assets/logos/moodify-logo-light.png" alt=""></a>
-  <span class="block h-px w-full divisor"></span>
+  <a class="logo-link"  (click)="toggleMenu($event)">
+    <img src="assets/logos/moodify-logo-light.png" alt="Moodify Logo">
+  </a>
+  <div class="menu-content" [class.menu-open]="isMenuOpen">
+    <span class="block h-px w-full divisor"></span>
 
-  <div class="top-list-section">
-    <ul>
-      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i
-        class="fas fa-light fa-home"></i>Home</a></li>
-      <li><a routerLink="favorites" routerLinkActive="active"><i class="fas fa-heart heart"></i>Favoritos</a></li>
-      <li><a routerLink="history" routerLinkActive="active"><i class="fa-solid fa-clock-rotate-left"></i>Historial</a>
-      </li>
-    </ul>
-  </div>
-  <span class="block h-px  w-full divisor"></span>
+    <div class="top-list-section">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i
+          class="fas fa-light fa-home"></i>Home</a></li>
+        <li><a routerLink="favorites" routerLinkActive="active"><i class="fas fa-heart heart"></i>Favoritos</a></li>
+        <li><a routerLink="history" routerLinkActive="active"><i class="fa-solid fa-clock-rotate-left"></i>Historial</a>
+        </li>
+      </ul>
+    </div>
+    <span class="block h-px w-full divisor"></span>
 
-  <div class="medium-list-section">
-    <ul>
-      <li><a routerLinkActive="active"><i class="fa-regular fa-lemon"></i>Cosa 1</a></li>
-      <li><a routerLinkActive="active"><i class="fa-regular fa-lemon"></i>Cosa 1</a></li>
-      <li><a routerLinkActive="active"><i class="fa-regular fa-lemon"></i>Cosa 1</a></li>
+    <div class="medium-list-section">
+      <ul>
+        <li><a routerLinkActive="active"><i class="fa-regular fa-lemon"></i>Cosa 1</a></li>
+        <li><a routerLinkActive="active"><i class="fa-regular fa-lemon"></i>Cosa 1</a></li>
+        <li><a routerLinkActive="active"><i class="fa-regular fa-lemon"></i>Cosa 1</a></li>
+      </ul>
+    </div>
+    <span class="block h-px w-full divisor"></span>
 
-    </ul>
-  </div>
-  <span class="block h-px  w-full divisor"></span>
-
-  <div class="bottom-list-section">
-    <ul>
-      <li><a routerLink="diary" routerLinkActive="active"><i class="fa-solid fa-pen-fancy"></i>Diario</a></li>
-      <li><a routerLink="graphics" routerLinkActive="active"><i class="fas fa-chart-pie"></i>Gráficos</a></li>
-      <li><a routerLink="moods" routerLinkActive="active"><i class="fa-regular fa-face-smile-wink smile"></i>Moods</a>
-      </li>
-    </ul>
+    <div class="bottom-list-section">
+      <ul>
+        <li><a routerLink="diary" routerLinkActive="active"><i class="fa-solid fa-pen-fancy"></i>Diario</a></li>
+        <li><a routerLink="graphics" routerLinkActive="active"><i class="fas fa-chart-pie"></i>Gráficos</a></li>
+        <li><a routerLink="moods" routerLinkActive="active"><i class="fa-regular fa-face-smile-wink smile"></i>Moods</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>

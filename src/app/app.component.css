@@ -36,7 +36,6 @@
   overflow-y: auto;
   background-color: var(--secondary-color);
   padding: 2rem;
-  /*box-shadow: 0 5px 10px 1px rgba(115, 57, 7, 0.59);*/
   margin-bottom: 15px;
   border-radius: 20px;
   min-height: 0;
@@ -67,19 +66,21 @@
   .sidebar {
     width: 100%;
     height: auto;
-    max-height: 150px;
+    max-height: none; /* Removido el límite de altura para permitir expansión */
+    z-index: 10; /* Asegurar que el sidebar esté por encima del contenido cuando se expande */
   }
 
   .container-side-bar {
     height: auto;
     margin: 10px 10px 5px 10px;
-    max-height: 130px;
-    overflow-y: auto;
+    max-height: none; /* Removido el límite de altura para permitir expansión */
+    overflow-y: visible;
+    transition: max-height 0.3s ease;
   }
 
   .content-area {
     padding: 0 10px 10px 10px;
-    max-height: 100vh ;
+    max-height: calc(100vh - 70px);
   }
 
   .main-content {
@@ -106,6 +107,3 @@
     padding: 5px 10px;
   }
 }
-
-
-

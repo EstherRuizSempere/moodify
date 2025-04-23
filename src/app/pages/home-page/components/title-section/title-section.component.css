@@ -1,6 +1,7 @@
 .main-title{
   display: flex;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .main-title h1{

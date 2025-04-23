@@ -7,6 +7,11 @@
   height: 400px;
   text-align: justify;
   align-items: start;
+  position: relative;
+}
+
+.menu-content {
+  width: 100%;
 }
 
 .divisor {
@@ -14,13 +19,11 @@
   margin-bottom: 15px;
 }
 
-
 ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 
 i {
   margin-right: 0.5rem;
@@ -49,32 +52,46 @@ a.active {
   color: var(--complementary-medium-dark-hover);
 }
 
-
-/* Media queries para hacer el sidebar responsivo */
+.logo-link {
+  cursor: pointer;
+}
 @media (max-width: 768px) {
   .side-bar {
-    flex-direction: row;
     height: auto;
-    justify-content: space-around;
+    width: 100%;
     align-items: center;
-    padding: 0 10px;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  .logo-link {
+    display: block;
+    text-align: center;
   }
 
   .side-bar img {
-    max-height: 40px;
+    max-height: 60px;
     width: auto;
   }
-  .top-list-section,
-  .medium-list-section,
-  .bottom-list-section, .divisor {
-    display: none;
+
+  ul {
+    align-items: center;
   }
 
+  .menu-content {
+    display: none;
+    transition: all 0.3s ease;
+  }
 
+  .menu-content.menu-open {
+    display: block;
+    animation: fadeIn 0.3s;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 }
 
-/* Ajustes para pantallas muy pequeñas */
-@media (max-width: 480px) {
-
-}
 

@@ -11,5 +11,13 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent {
+  isMenuOpen = false;
+
+  toggleMenu(event:Event) {
+    if(window.innerWidth <= 768) {
+      event.preventDefault();
+      this.isMenuOpen = !this.isMenuOpen;
+    }
+  }
 
 }
