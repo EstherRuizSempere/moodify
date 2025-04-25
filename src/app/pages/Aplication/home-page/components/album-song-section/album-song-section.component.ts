@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CardSongComponent} from '../../../../shared/card-song/card-song.component';
-import {Track} from '../../../../interfaces/track';
+import {CardSongComponent} from '../../../../../shared/card-song/card-song.component';
+import {Track} from '../../../../../interfaces/track';
 import {Subscription} from 'rxjs';
-import {TrackService} from '../../../../../services/track.service';
+import {TrackService} from '../../../../../../services/track.service';
 import {CommonModule} from '@angular/common';
 
 @Component({

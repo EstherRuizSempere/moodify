@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MoodsComponent} from './components/moods/moods.component';
-import {Emotions} from '../../interfaces/emotions';
-import {MoodsDataService} from '../../../services/moods-data.service';
+import {Emotions} from '../../../interfaces/emotions';
+import {MoodsDataService} from '../../../../services/moods-data.service';
 import {ModalEmotionsComponent} from './components/modal-emotions/modal-emotions.component';
 
 

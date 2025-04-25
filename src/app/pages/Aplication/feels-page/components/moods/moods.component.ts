@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {Emotions} from '../../../../interfaces/emotions';
-import {EmotionModalServiceService} from '../../../../../services/emotion-modal-service.service';
+import {Emotions} from '../../../../../interfaces/emotions';
+import {EmotionModalServiceService} from '../../../../../../services/emotion-modal-service.service';
 
 @Component({
   selector: 'app-moods',

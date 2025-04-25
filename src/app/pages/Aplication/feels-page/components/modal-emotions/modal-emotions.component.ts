@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Emotions} from '../../../../interfaces/emotions';
+import {Emotions} from '../../../../../interfaces/emotions';
 import {Subscription} from 'rxjs';
-import {EmotionModalServiceService} from '../../../../../services/emotion-modal-service.service';
+import {EmotionModalServiceService} from '../../../../../../services/emotion-modal-service.service';
 
 @Component({
   selector: 'app-modal-emotions',

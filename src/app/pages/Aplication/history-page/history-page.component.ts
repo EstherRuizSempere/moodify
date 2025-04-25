@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ListSongComponent } from '../../shared/list-song/list-song.component';
+import { ListSongComponent } from '../../../shared/list-song/list-song.component';
 import { FormsModule } from '@angular/forms';
-import { Track } from '../../interfaces/track';
-import { TrackService } from '../../../services/track.service';
-import { TrackPlayerService } from '../../../services/track-player.service';
+import { Track } from '../../../interfaces/track';
+import { TrackService } from '../../../../services/track.service';
+import { TrackPlayerService } from '../../../../services/track-player.service';
 
 @Component({
   selector: 'app-history-page',

@@ -18,3 +18,7 @@
   box-sizing: border-box;
   font-family: "Zain", sans-serif;
 }
+
+body{
+  background-color: var(--secondary-color);
+}
