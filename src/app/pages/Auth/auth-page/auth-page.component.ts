@@ -44,8 +44,9 @@ export class AuthPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log("Función lanzada")
     if (this.authForm.valid) {
-      console.log('Form submitted:', this.authForm.value);
+      console.log('Formulario enviado:', this.authForm.value);
     } else {
       this.markFormGroupTouched(this.authForm);
     }

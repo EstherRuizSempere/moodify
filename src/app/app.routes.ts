@@ -17,10 +17,10 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    component: MainPageComponent, // layout
+    component: MainPageComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         title: 'Moodify | Home',
         component: HomePageComponent
       },
