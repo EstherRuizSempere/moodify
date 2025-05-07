@@ -34,9 +34,7 @@ i.heart {
   color: #e03636;
 }
 
-i.smile {
-  color: #794f5a;
-}
+
 
 a {
   transition: transform 0.3s ease;
@@ -55,6 +53,16 @@ a.active {
 .logo-link {
   cursor: pointer;
 }
+
+.context-app{
+  position: fixed;
+  bottom: 30px;
+}
+
+.context-divisor{
+  margin-top: 275px;
+}
+
 @media (max-width: 768px) {
   .side-bar {
     height: auto;
@@ -81,6 +89,17 @@ a.active {
   .menu-content {
     display: none;
     transition: all 0.3s ease;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  .context-divisor{
+    margin-top: 0;
+  }
+
+  .context-app{
+    position: relative;
+    bottom: 0;
   }
 
   .menu-content.menu-open {

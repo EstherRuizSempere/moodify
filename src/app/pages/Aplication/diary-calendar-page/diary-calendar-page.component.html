@@ -1,1 +1,68 @@
-<p>diary-calendar-page works!</p>
+<div class="calendar-section">
+  <div class="section-header">
+    <h2 class="section-title">Mi Calendario</h2>
+  </div>
+
+  <div class="section-subtitle">
+    <p>Registra tus emociones día a día y lleva un seguimiento de como te sientes.</p>
+    <p>¡Cada día es una nueva oportunidad para entender mejor tus emociones! 😸😸</p>
+  </div>
+
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button class="nav-button" (click)="prevMonth()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <h3 class="current-month">{{ currentMonthName }} {{ currentYear }}</h3>
+
+      <button class="nav-button" (click)="nextMonth()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="weekdays">
+      @for (day of weekdays; track $index) {
+        <div class="weekday">
+          {{ day }}
+        </div>
+      }
+    </div>
+
+    <div class="calendar-grid">
+      @for (day of previousMonthDays; track $index) {
+        <div class="day prev-month">
+          {{ day }}
+        </div>
+      }
+
+      @for (day of currentMonthdays; track $index) {
+        <div class="day current-month" [ngClass]="{'has-mood': hasMoodForDay(day)}" (click)="openMoodModal(day)">
+          <span class="day-number">{{ day }}</span>
+          @if (hasMoodForDay(day)) {
+            <div class="mood-indicator">
+              @if (getMoodInfo(day).image) {
+                <img [src]="getMoodInfo(day).image" [alt]="getMoodInfo(day).alt" class="mood-icon">
+              }
+            </div>
+          }
+        </div>
+      }
+
+      @for (day of nextMonthDays; track $index) {
+        <div class="day next-month">
+          {{ day }}
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<app-mood-modal
+  [show]="showModal"
+  [selectedDate]="selectedDate"
+  [availableMoods]="availableMoods"
+  [initialMood]="selectedMood"
+  [initialNote]="dayNote"
+  (closeModal)="closeModal()"
+  (saveMood)="onMoodSaved($event)">
+</app-mood-modal>

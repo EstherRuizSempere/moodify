@@ -18,6 +18,7 @@ export class ListSongComponent implements OnInit, OnDestroy {
   @Input() track!: Track;
   @Input() index!: number;
   @Input() isPlaying: boolean = false;
+  @Input() isFavorite: boolean = false;
 
   @Output() play = new EventEmitter<Track>();
   @Output() like = new EventEmitter<Track>();
@@ -36,7 +37,7 @@ export class ListSongComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Inicializa las propiedades opcionales si no están definidas
     if (this.track) {
-      this.track.isLiked = this.track.isLiked !== undefined ? this.track.isLiked : false;
+      this.track.isLiked = this.isFavorite || this.track.isLiked || false;
       this.track.playedAt = this.track.playedAt || new Date();
     }
 
@@ -70,11 +71,11 @@ export class ListSongComponent implements OnInit, OnDestroy {
   }
 
   playTrack(): void {
-    this.trackPlayerService.playTrack(this.track);
+    this.play.emit(this.track);
   }
 
   toggleLike(): void {
-    this.track = this.trackPlayerService.toggleLike(this.track);
+    this.like.emit(this.track);
   }
 
   formatDuration(durationMs: number): string {

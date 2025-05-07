@@ -7,16 +7,18 @@ import {DiaryCalendarPageComponent} from './pages/Aplication/diary-calendar-page
 import {GraphicMoodsPageComponent} from './pages/Aplication/graphic-moods-page/graphic-moods-page.component';
 import {FeelsPageComponent} from './pages/Aplication/feels-page/feels-page.component';
 import {MainPageComponent} from './pages/Aplication/main-page/main-page.component';
+import {AboutPageComponent} from './pages/Aplication/about-page/about-page.component';
+import {LogoutPageComponent} from './pages/Aplication/logout-page/logout-page.component';
 
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     title: 'Moodify | Autentificación',
     component: AuthPageComponent
   },
   {
-    path: 'auth',
+    path: '',
     component: MainPageComponent,
     children: [
       {
@@ -48,6 +50,21 @@ export const routes: Routes = [
         path: 'moods',
         title: 'Moodify | Moods',
         component: FeelsPageComponent
+      },
+      {
+        path: 'about',
+        title: 'Moodify | About Moodify',
+        component: AboutPageComponent
+      },
+      // {
+      //   path: 'social',
+      //   title: 'Moodify | Social Media',
+      //   component: FeelsPageComponent
+      // },
+      {
+        path: 'logout',
+        title: 'Moodify | Bye',
+        component: LogoutPageComponent
       }
     ]
   },

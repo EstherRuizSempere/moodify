@@ -1,6 +1,6 @@
-export interface Track  {
+export interface Track {
   id: number | string;
-  name:string;
+  name: string;
   artist: string;
   album: string;
   imageUrl?: string;
@@ -8,4 +8,5 @@ export interface Track  {
   playedAt?: Date;
   songUrl?: string;
   isLiked?: boolean;
+  addedToFavoritesAt?: Date | null;
 }

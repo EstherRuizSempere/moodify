@@ -1,1 +1,61 @@
-<p>favorites-page works!</p>
+<div class="favorites-container">
+  <div class="favorites-header">
+    <h1>Canciones Favoritas</h1>
+    <div class="favorites-filters">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          placeholder="Buscar en favoritos"
+          [(ngModel)]="searchTerm"
+          (input)="filterAndSortTracks()">
+      </div>
+      <div class="sort-filter">
+        <select [(ngModel)]="sortFilter" (change)="filterAndSortTracks()">
+          <option value="recent">Añadidas recientemente</option>
+          <option value="az">Título (A-Z)</option>
+          <option value="za">Título (Z-A)</option>
+          <option value="artist">Artista</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="favorites-list-header">
+    <div class="header-number">#</div>
+    <div class="header-title">TÍTULO</div>
+    <div class="header-album d-none d-md-block">ÁLBUM</div>
+    <div class="header-date d-none d-lg-block">AÑADIDA A FAVORITOS</div>
+    <div class="header-duration">
+      <i class="far fa-clock"></i>
+    </div>
+  </div>
+
+  <div class="track-list">
+    @for (track of filteredTracks; track track.id; let i = $index) {
+      <app-list-song
+        [track]="track"
+        [index]="i"
+        [isPlaying]="currentPlayingId === track.id"
+        [isFavorite]="true"
+        (play)="onPlayTrack($event)"
+        (like)="removeFromFavorites($event)">
+      </app-list-song>
+    }
+  </div>
+
+  @if (filteredTracks.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <h3>No hay canciones en tus favoritos</h3>
+      @if (searchTerm) {
+        <p>No se encontraron resultados para "{{ searchTerm }}"</p>
+      }
+      @if (!searchTerm) {
+        <p>¡Marca algunas canciones como favoritas para verlas aquí!</p>
+      }
+    </div>
+  }
+</div>

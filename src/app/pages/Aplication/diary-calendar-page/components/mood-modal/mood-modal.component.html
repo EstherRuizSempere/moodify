@@ -1,0 +1,46 @@
+@if (show) {
+<div class="modal-backdrop"  (click)="onClose($event)">
+  <div class="mood-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{ selectedDate | date:'d MMMM, yyyy' }}</h3>
+      <button class="close-button" (click)="onClose($event)">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <h4>¿Cómo te sientes hoy?</h4>
+
+      <div class="moods-grid">
+        @for (mood of availableMoods; track mood.id) {
+          <div class="mood-option"
+               [ngClass]="{'selected': selectedMood?.id === mood.id}"
+               (click)="selectMood(mood)">
+            <img [src]="mood.image" [alt]="mood.alt" class="mood-icon">
+            <span>{{ mood.name }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="notes-section">
+        <h4>Nota del día</h4>
+        <textarea
+          [(ngModel)]="dayNote"
+          placeholder="¿Cómo ha ido tu día? (opcional)"
+          rows="4"></textarea>
+      </div>
+
+      @if (selectedMood) {
+        <div class="mood-description">
+          <p>{{ selectedMood.description }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="modal-footer">
+      <button class="cancel-button" (click)="onClose($event)">Cancelar</button>
+      <button class="save-button" [disabled]="!selectedMood" (click)="onSave()">Guardar</button>
+    </div>
+  </div>
+</div>
+}

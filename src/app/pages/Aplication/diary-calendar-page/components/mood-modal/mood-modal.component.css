@@ -1,0 +1,303 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.mood-modal {
+  width: 90%;
+  max-width: 500px;
+  max-height: 85vh;
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: modalOpen 0.3s forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--complementary-medium-dark);
+  color: var(--dark-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.close-button:hover {
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.modal-body h4 {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  text-align: center;
+}
+
+.moods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mood-option:hover {
+  background-color: var(--complementary-color);
+  transform: translateY(-2px);
+}
+
+.mood-option.selected {
+  background-color: var(--complementary-medium-dark);
+  box-shadow: 0 2px 8px rgba(115, 57, 7, 0.3);
+}
+
+.mood-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  object-fit: contain;
+}
+
+.notes-section {
+  margin-top: 20px;
+}
+
+.notes-section textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--medium-dark-color);
+  background-color: var(--secondary-color);
+  resize: none;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.notes-section textarea:focus {
+  outline: none;
+  border-color: var(--complementary-medium-dark-hover);
+}
+
+.mood-description {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: var(--secondary-color);
+  border-radius: 12px;
+  font-style: italic;
+  color: var(--dark-color);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+  background-color: var(--secondary-color);
+  gap: 10px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.cancel-button, .save-button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button {
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+}
+
+.cancel-button:hover {
+  background-color: var(--complementary-color);
+}
+
+.save-button {
+  background-color: var(--complementary-medium-dark);
+  color: var(--dark-color);
+}
+
+.save-button:hover {
+  background-color: var(--complementary-medium-dark-hover);
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (max-width: 768px) {
+  .mood-modal {
+    width: 95%;
+    max-width: 450px;
+    max-height: 80vh;
+  }
+
+  .modal-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .modal-body h4 {
+    font-size: 1.1rem;
+  }
+
+  .mood-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .mood-option {
+    padding: 8px;
+  }
+
+  .modal-footer {
+    padding: 12px 15px;
+  }
+
+  .cancel-button, .save-button {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mood-modal {
+    width: 98%;
+    max-width: none;
+    max-height: 90vh;
+  }
+
+  .moods-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  .modal-body h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .mood-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .notes-section textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .mood-description {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .modal-footer {
+    padding: 10px;
+  }
+
+  .cancel-button, .save-button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal-header {
+    padding: 12px 15px;
+  }
+
+  .moods-grid {
+    gap: 8px;
+  }
+
+  .mood-option {
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  .mood-icon {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 5px;
+  }
+
+  .mood-option span {
+    font-size: 0.85rem;
+  }
+
+  .notes-section {
+    margin-top: 15px;
+  }
+
+  .cancel-button, .save-button {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+  }
+}
