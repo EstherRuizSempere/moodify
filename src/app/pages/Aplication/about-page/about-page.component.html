@@ -1,1 +1,49 @@
-<p>about-page works!</p>
+<section class="about-container">
+  <!-- Sección About Moodify -->
+  <div class="about-section about-moodify">
+    <div class="about-header">
+      <div class="logo-container">
+        <img src="assets/logos/moodify-logo-light.png" alt="Moodify Logo" class="about-logo">
+      </div>
+      <h1 class="section-title">{{ aboutMoodify.title }}</h1>
+    </div>
+
+    <div class="about-content">
+      <div class="about-description">
+        @for (paragraph of aboutMoodify.description; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+
+      <div class="features-container">
+        @for (feature of aboutMoodify.features; track $index) {
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="{{ feature.icon }}"></i>
+            </div>
+            <h3 class="feature-title">{{ feature.title }}</h3>
+            <p class="feature-description">{{ feature.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección About Me -->
+  <div class="about-section about-me">
+    <h2 class="section-title">Sobre Mí</h2>
+
+    <div class="profile-container">
+      <div class="profile-image-container">
+        <img [src]="aboutMe.imageUrl" alt="Developer" class="profile-image">
+        <div class="profile-decoration"></div>
+      </div>
+
+      <div class="profile-info">
+        <h3 class="profile-name">{{ aboutMe.name }}</h3>
+        <p class="profile-role">{{ aboutMe.role }}</p>
+        <p class="profile-bio">{{ aboutMe.bio }}</p>
+      </div>
+    </div>
+  </div>
+</section>
