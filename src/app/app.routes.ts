@@ -9,13 +9,20 @@ import {FeelsPageComponent} from './pages/Aplication/feels-page/feels-page.compo
 import {MainPageComponent} from './pages/Aplication/main-page/main-page.component';
 import {AboutPageComponent} from './pages/Aplication/about-page/about-page.component';
 import {LogoutPageComponent} from './pages/Aplication/logout-page/logout-page.component';
+import {LoginComponent} from './pages/Auth/login/login.component';
+import {RegisterComponent} from './pages/Auth/register/register.component';
 
 
 export const routes: Routes = [
   {
     path: 'auth',
     title: 'Moodify | Autentificación',
-    component: AuthPageComponent
+    component: AuthPageComponent,
+    children: [
+      { component: LoginComponent, path: 'login' },
+      { component: RegisterComponent, path: 'register' },
+      { path: "**", redirectTo: 'login' }
+    ]
   },
   {
     path: '',
@@ -70,6 +77,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'home'
   }
 ];

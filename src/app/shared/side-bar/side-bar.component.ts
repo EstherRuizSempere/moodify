@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
@@ -13,6 +13,8 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 export class SideBarComponent {
   isMenuOpen = false;
 
+  private router: Router = inject(Router)
+
   toggleMenu(event:Event) {
     if(window.innerWidth <= 768) {
       event.preventDefault();
@@ -20,4 +22,8 @@ export class SideBarComponent {
     }
   }
 
+  public logout(){
+    localStorage.removeItem('userData');
+    this.router.navigate(['/auth/login']);
+  }
 }

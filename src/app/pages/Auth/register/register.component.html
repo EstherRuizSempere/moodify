@@ -1,0 +1,37 @@
+<form [formGroup]="registerForm" (submit)="onSubmit()">
+
+    <div class="login-section">
+      <div class="logo-link">
+        <img src="assets/logos/moodify-logo-light.png" alt="Moodify Logo">
+      </div>
+      <h2 class="form-title">Registro</h2>
+
+      <input
+        formControlName="name"
+        placeholder="Nombre completo"
+        type="text"
+        [class.invalid]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+
+      <input
+        formControlName="email"
+        placeholder="Email"
+        type="email"
+        [class.invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+
+      <input
+        formControlName="password"
+        placeholder="Contraseña"
+        type="password"
+        [class.invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+
+      <div class="buttons">
+        <button type="submit">
+          <i class="fa fa-user-plus"></i> Registrarse
+        </button>
+
+        <div class="form-footer">
+          <a [routerLink]="'/auth/login'">Volver al login</a>
+        </div>
+      </div>
+    </div>
+</form>
