@@ -11,7 +11,11 @@ import {AboutPageComponent} from './pages/Aplication/about-page/about-page.compo
 import {LogoutPageComponent} from './pages/Aplication/logout-page/logout-page.component';
 import {LoginComponent} from './pages/Auth/login/login.component';
 import {RegisterComponent} from './pages/Auth/register/register.component';
-
+import {ApiFunComponent} from './apis/api-fun/api-fun.component';
+import {ApiCatComponent} from './apis/api-cat/api-cat.component';
+import {GiphyApiComponent} from './apis/giphy-api/giphy-api.component';
+import {BuscaminasComponent} from './apis/buscaminas/buscaminas.component';
+import {MemoryComponent} from './apis/memory/memory.component';
 
 export const routes: Routes = [
   {
@@ -19,9 +23,9 @@ export const routes: Routes = [
     title: 'Moodify | Autentificación',
     component: AuthPageComponent,
     children: [
-      { component: LoginComponent, path: 'login' },
-      { component: RegisterComponent, path: 'register' },
-      { path: "**", redirectTo: 'login' }
+      {component: LoginComponent, path: 'login'},
+      {component: RegisterComponent, path: 'register'},
+      {path: "**", redirectTo: 'login'}
     ]
   },
   {
@@ -72,7 +76,32 @@ export const routes: Routes = [
         path: 'logout',
         title: 'Moodify | Bye',
         component: LogoutPageComponent
-      }
+      },
+      {
+        path: 'apifun'
+        , title: 'Moodify | API Fun',
+        component: ApiFunComponent
+      },
+      {
+        path: 'api-cat',
+        title: 'Moodify | Random Cat 😸',
+        component: ApiCatComponent
+      },
+      {
+        path: 'api-games',
+        title: 'Moodify | Buscaminas 🎳',
+        component: BuscaminasComponent
+      },
+      {
+        path: 'giphy-api',
+        title: 'Moodify | Giphy API',
+        component: GiphyApiComponent
+      },
+      {
+        path: 'cards-api',
+        title: 'Moodify | Parejas 🧠',
+        component: MemoryComponent
+      },
     ]
   },
   {

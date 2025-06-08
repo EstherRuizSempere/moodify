@@ -1,0 +1,23 @@
+<div class="game-widget-container">
+  <h3 class="game-widget-title">🧠 Juego de parejas</h3>
+
+  <div class="game-widget-subtitle">
+    Encuentra las parejas de imágenes. ¡Memoriza bien! 🖼️
+  </div>
+
+  <div class="game-widget-content">
+    <div class="memory-grid">
+      <div *ngFor="let card of cards; index as i"
+           class="memory-card"
+           [class.flipped]="card.flipped || card.matched"
+           (click)="flipCard(i)">
+        <div class="card-inner">
+          <div class="card-front"></div>
+          <div class="card-back">
+            <img [src]="card.image" alt="Card image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

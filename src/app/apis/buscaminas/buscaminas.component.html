@@ -1,0 +1,18 @@
+<div class="game-widget-container">
+  <h3 class="game-widget-title">🚩 Buscaminas</h3>
+
+  <div class="game-widget-subtitle">
+    Tienes <strong>{{ lives }}</strong> vidas. ¡Evita las minas! Cada error te quita una vida.
+  </div>
+
+  <div class="game-widget-content">
+    <div class="minesweeper-grid">
+      <button *ngFor="let cell of grid; index as i"
+              [class.revealed]="cell.revealed"
+              [class.mine]="cell.isMine && cell.revealed"
+              (click)="revealCell(i)">
+        {{ cell.revealed && !cell.isMine ? cell.adjacentMines || '' : '' }}
+      </button>
+    </div>
+  </div>
+</div>

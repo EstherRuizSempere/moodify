@@ -1,0 +1,9 @@
+<div class="advice-container">
+  <h2>Consejito del día</h2>
+
+  <p *ngIf="loading">Cargando consejo...</p>
+
+  <p *ngIf="!loading" [class.fade-in]="animateAdvice">{{ adviceText }}</p>
+
+  <button (click)="getAdvice()">🔄 Otro consejo</button>
+</div>

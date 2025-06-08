@@ -1,0 +1,11 @@
+<div class="cat-widget-container">
+  <h3 class="cat-widget-title">😻 ¡Un gatito para alegrarte el día!</h3>
+
+  <div *ngIf="loading" class="cat-widget-loading">Cargando un minino...</div>
+
+  <div *ngIf="!loading && catImageUrl" class="cat-widget-image-container">
+    <img [src]="catImageUrl" alt="Gatito adorable" class="cat-widget-image">
+  </div>
+
+  <button class="cat-widget-button" (click)="fetchRandomCat()">Otro gato 🐾</button>
+</div>

@@ -1,0 +1,8 @@
+<div class="fun-card">
+  <h3>🎬 GIF Divertido</h3>
+  <button (click)="getGif()">🎲 Ver un GIF</button>
+
+  <div *ngIf="gifUrl" class="gif-container">
+    <img [src]="gifUrl" alt="Gif divertido" />
+  </div>
+</div>

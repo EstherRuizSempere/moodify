@@ -1,0 +1,115 @@
+.game-widget-container {
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  box-shadow: 0 6px 16px var(--medium-dark-color);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-widget-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--medium-dark-color);
+  margin-bottom: 10px;
+}
+
+.game-widget-subtitle {
+  font-size: 1rem;
+  color: var(--dark-color);
+  opacity: 0.8;
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+.game-widget-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.minesweeper-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 40px);
+  grid-gap: 5px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.minesweeper-grid button {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--medium-dark-color);
+  background-color: var(--primary-color);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.minesweeper-grid button:hover {
+  background-color: var(--complementary-medium-dark-hover);
+}
+
+.minesweeper-grid button.revealed {
+  background-color: var(--secondary-color);
+  cursor: default;
+}
+
+.minesweeper-grid button.mine {
+  background-color: #e03636;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .game-widget-title {
+    font-size: 1.5rem;
+  }
+
+  .game-widget-subtitle {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  .minesweeper-grid {
+    grid-template-columns: repeat(6, 36px);
+    grid-gap: 4px;
+  }
+
+  .minesweeper-grid button {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-widget-container {
+    padding: 15px;
+  }
+
+  .game-widget-title {
+    font-size: 1.3rem;
+  }
+
+  .game-widget-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .minesweeper-grid {
+    grid-template-columns: repeat(5, 34px);
+    grid-gap: 4px;
+  }
+
+  .minesweeper-grid button {
+    width: 34px;
+    height: 34px;
+    font-size: 0.85rem;
+  }
+}
