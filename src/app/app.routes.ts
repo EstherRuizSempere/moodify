@@ -8,7 +8,6 @@ import {GraphicMoodsPageComponent} from './pages/Aplication/graphic-moods-page/g
 import {FeelsPageComponent} from './pages/Aplication/feels-page/feels-page.component';
 import {MainPageComponent} from './pages/Aplication/main-page/main-page.component';
 import {AboutPageComponent} from './pages/Aplication/about-page/about-page.component';
-import {LogoutPageComponent} from './pages/Aplication/logout-page/logout-page.component';
 import {LoginComponent} from './pages/Auth/login/login.component';
 import {RegisterComponent} from './pages/Auth/register/register.component';
 import {ApiFunComponent} from './apis/api-fun/api-fun.component';
@@ -16,15 +15,18 @@ import {ApiCatComponent} from './apis/api-cat/api-cat.component';
 import {GiphyApiComponent} from './apis/giphy-api/giphy-api.component';
 import {BuscaminasComponent} from './apis/buscaminas/buscaminas.component';
 import {MemoryComponent} from './apis/memory/memory.component';
-
+import {AuthGuard} from './guards/auth.guard';
+import {SettingsPageComponent} from './pages/Aplication/settings-page/settings-page.component';
+import {ForgotPasswordComponent} from './pages/Auth/forgot-password/forgot-password.component';
 export const routes: Routes = [
   {
     path: 'auth',
     title: 'Moodify | Autentificación',
     component: AuthPageComponent,
     children: [
-      {component: LoginComponent, path: 'login'},
-      {component: RegisterComponent, path: 'register'},
+      {component: LoginComponent, path: 'login', title: 'Moodify | Login'},
+      {component: RegisterComponent, path: 'register', title: 'Moodify | Registro'},
+      {component: ForgotPasswordComponent, path: 'forgot-password', title: 'Moodify | Recuperar contraseña'},
       {path: "**", redirectTo: 'login'}
     ]
   },
@@ -35,72 +37,79 @@ export const routes: Routes = [
       {
         path: 'home',
         title: 'Moodify | Home',
-        component: HomePageComponent
+        component: HomePageComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'favorites',
         title: 'Moodify | Favoritos',
-        component: FavoritesPageComponent
+        component: FavoritesPageComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'history',
         title: 'Moodify | Historial',
-        component: HistoryPageComponent
+        component: HistoryPageComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'diary',
         title: 'Moodify | Diario',
-        component: DiaryCalendarPageComponent
+        component: DiaryCalendarPageComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'graphics',
         title: 'Moodify | Gráficos',
-        component: GraphicMoodsPageComponent
+        component: GraphicMoodsPageComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'moods',
         title: 'Moodify | Moods',
-        component: FeelsPageComponent
+        component: FeelsPageComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'about',
         title: 'Moodify | About Moodify',
-        component: AboutPageComponent
+        component: AboutPageComponent,
+        canActivate: [AuthGuard]
       },
-      // {
-      //   path: 'social',
-      //   title: 'Moodify | Social Media',
-      //   component: FeelsPageComponent
-      // },
       {
-        path: 'logout',
-        title: 'Moodify | Bye',
-        component: LogoutPageComponent
+        path: 'settings',
+        title: 'Moodify | Ajustes 🔩',
+        component:SettingsPageComponent,
       },
       {
         path: 'apifun'
         , title: 'Moodify | API Fun',
-        component: ApiFunComponent
+        component: ApiFunComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'api-cat',
         title: 'Moodify | Random Cat 😸',
-        component: ApiCatComponent
+        component: ApiCatComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'api-games',
         title: 'Moodify | Buscaminas 🎳',
-        component: BuscaminasComponent
+        component: BuscaminasComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'giphy-api',
         title: 'Moodify | Giphy API',
-        component: GiphyApiComponent
+        component: GiphyApiComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'cards-api',
         title: 'Moodify | Parejas 🧠',
-        component: MemoryComponent
+        component: MemoryComponent,
+        canActivate: [AuthGuard]
       },
     ]
   },

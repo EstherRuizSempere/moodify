@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {CommonModule, NgClass} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Emotions} from '../../../../../interfaces/emotions';
+import {SaveEmotionService} from '../../../../../../services/save-emotion.service';
+import {AuthService} from '../../../../../../services/auth.service';
 
 @Component({
   selector: 'app-mood-modal',
@@ -11,7 +13,7 @@ import {Emotions} from '../../../../../interfaces/emotions';
   templateUrl: './mood-modal.component.html',
   styleUrl: './mood-modal.component.css'
 })
-export class MoodModalComponent implements OnChanges {
+export class MoodModalComponent implements OnChanges, OnInit {
   @Input() show: boolean = false;
   @Input() selectedDate: Date | null = null;
   @Input() availableMoods: Emotions[] = [];
@@ -24,8 +26,18 @@ export class MoodModalComponent implements OnChanges {
   selectedMood: Emotions | null = null;
   dayNote: string = "";
 
-  ngOnChanges(changes: SimpleChanges) {
-    //Cuando cambie los inputs, se actualiza el estado interno
+  constructor(
+    private saveEmotionService: SaveEmotionService,
+    private authService: AuthService
+  ) {
+  }
+
+  ngOnInit() {
+    this.selectedMood = this.initialMood;
+    this.dayNote = this.initialNote;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['initialMood'] || changes['initialNote']) {
       this.selectedMood = this.initialMood;
       this.dayNote = this.initialNote;
@@ -38,12 +50,39 @@ export class MoodModalComponent implements OnChanges {
   }
 
   onSave(): void {
-    if (!this.selectedMood) return;
+    if (!this.selectedDate) {
+      console.error('No hay fecha seleccionada, no se puede guardar la emoción.');
+      return;
+    }
 
-    //Sino
-    this.saveMood.emit({
-      moodId: this.selectedMood.id,
-      note: this.dayNote
+    if (!this.selectedMood) {
+      console.error('No hay estado de ánimo seleccionado.');
+      return;
+    }
+
+    const user_id = this.authService.getUserId();
+    const fecha = this.selectedDate.toISOString().split('T')[0];
+
+    this.saveEmotionService.saveEmotion(
+      user_id,
+      fecha,
+      this.selectedMood.name, // emotion
+      this.dayNote
+    ).subscribe({
+      next: (res: any) => {
+        console.log('Emoción guardada:', res);
+
+        // Emitir saveMood para que el calendario pueda actualizarse (opcional)
+        this.saveMood.emit({
+          moodId: this.selectedMood!.id,
+          note: this.dayNote
+        });
+
+        this.closeModal.emit();
+      },
+      error: (err) => {
+        console.error('Error al guardar emoción:', err);
+      }
     });
   }
 

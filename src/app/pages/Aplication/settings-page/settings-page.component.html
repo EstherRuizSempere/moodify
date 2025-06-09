@@ -1,0 +1,33 @@
+<section class="settings-container">
+  <h1 class="settings-title">Settings</h1>
+
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="settings-form">
+    <label>
+      Nombre de usuario:
+      <input type="text" formControlName="name" />
+    </label>
+
+    <label>
+      Correo electrónico:
+      <input type="email" formControlName="email" />
+    </label>
+
+    <label>
+      Nueva contraseña:
+      <input type="password" formControlName="password" />
+    </label>
+
+    <button type="submit">Guardar Cambios</button>
+    <button type="button" (click)="deleteAccount()" class="delete-button">
+      <i class="fa fa-trash"></i> Eliminar cuenta
+    </button>
+
+
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </form>
+</section>

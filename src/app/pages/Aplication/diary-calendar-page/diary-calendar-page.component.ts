@@ -1,14 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NgClass} from '@angular/common';
-import {Emotions} from '../../../interfaces/emotions';
-import {MoodsDataService} from '../../../../services/moods-data.service';
-import {MoodModalComponent} from './components/mood-modal/mood-modal.component';
-
-interface MoodEntry {
-  date: Date;
-  moodId: number;
-  note?: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Emotions } from '../../../interfaces/emotions';
+import { MoodsDataService } from '../../../../services/moods-data.service';
+import { MoodModalComponent } from './components/mood-modal/mood-modal.component';
+import { SaveEmotionService } from '../../../../services/save-emotion.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-diary-calendar-page',
@@ -21,12 +17,11 @@ interface MoodEntry {
 })
 export class DiaryCalendarPageComponent implements OnInit {
 
-  //Propiedades para el calendario
+  // Propiedades para el calendario
   currentDate = new Date();
   currentYear = this.currentDate.getFullYear();
   currentMonth = this.currentDate.getMonth();
 
-  //Preguntar a alexis, ¿es viable que esto sea una interfaz?
   weekdays: string[] = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
   monthNames: string[] = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -38,69 +33,76 @@ export class DiaryCalendarPageComponent implements OnInit {
   currentMonthdays: number[] = [];
   nextMonthDays: number[] = [];
 
-  //Propiuedades para la modal y la entrada del estado de ánimo
+  // Propiedades para la modal
   showModal: boolean = false;
   selectedDate: Date | null = null;
   selectedMood: Emotions | null = null;
   dayNote: string = '';
-  moodEntries: MoodEntry[] = [];
 
   // Estados de ánimo cargados desde el servicio
   availableMoods: Emotions[] = [];
 
-  constructor(private moodService: MoodsDataService) {
-  }
+  // Mapa fecha → emoción (BD)
+  emotionsPerDay: { [fecha: string]: string } = {};
+
+  constructor(
+    private moodService: MoodsDataService,
+    private saveEmotionService: SaveEmotionService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.loadMoods();
-    this.loadMoodEntries();
+    this.loadEmotions();
     this.generateCalendar();
   }
 
-  //Cargo los estados de ánimo desde el servicio
+  // Cargar estados de ánimo desde el servicio
   loadMoods() {
     this.moodService.getData().subscribe({
       next: (moods) => {
         this.availableMoods = moods;
       },
       error: (error) => {
-        console.error("Error al cargar los estados de ánimo", error)
+        console.error("Error al cargar los estados de ánimo", error);
       }
     });
   }
 
-  //Carga de entradas de estados de ánimo (pr ahora con local)
-  loadMoodEntries(): void {
-    const savedEntries = localStorage.getItem('moodEntries');
-    if (savedEntries) {
-      //transformar las fechas que son string a objeto date
-      const parseado = JSON.parse(savedEntries);
-      this.moodEntries = parseado.map((entry: any) => ({
-        ...entry,
-        date: new Date(entry.date)
-      }));
-    }
+  // Cargar emociones desde la base de datos
+  loadEmotions() {
+    const user_id = this.authService.getUserId();
+
+    this.saveEmotionService.listEmotions(user_id).subscribe({
+      next: (res: any) => {
+        console.log('Emociones recibidas:', res);
+        if (res.status === 'success') {
+          this.emotionsPerDay = {};
+
+          res.data.forEach((emotionEntry: any) => {
+            this.emotionsPerDay[emotionEntry.fecha] = emotionEntry.emotion;
+          });
+
+          console.log('Mapa emotionsPerDay:', this.emotionsPerDay);
+        }
+      },
+      error: (err) => {
+        console.error('Error al listar emociones:', err);
+      }
+    });
   }
 
-  //Guardar la entrada de estado de ánimo
-  savedMoodEntries(): void {
-    localStorage.setItem('moodEntries', JSON.stringify(this.moodEntries));
-  }
-
-  //Generar calendario para el mes
+  // Generar calendario
   generateCalendar(): void {
     this.previousMonthDays = [];
     this.currentMonthdays = [];
     this.nextMonthDays = [];
 
-    //obtener el primer día del mes actual
     const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-    //   obtener el último día de l mes actual
     const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
 
-    // Ajustar para que la semana comience en lunes (0 = Lunes, 6 = Domingo)
     let firstDayOfWeek = firstDay.getDay() - 1;
-    if (firstDayOfWeek < 0) firstDayOfWeek = 6; // Si es domingo (0), ajustar a 6
+    if (firstDayOfWeek < 0) firstDayOfWeek = 6;
 
     // Días del mes anterior
     if (firstDayOfWeek > 0) {
@@ -117,7 +119,7 @@ export class DiaryCalendarPageComponent implements OnInit {
 
     // Días del mes siguiente
     const totalDaysShown = this.previousMonthDays.length + this.currentMonthdays.length;
-    const nextMonthDays = 42 - totalDaysShown; // 6 semanas * 7 días = 42
+    const nextMonthDays = 42 - totalDaysShown;
 
     for (let i = 1; i <= nextMonthDays; i++) {
       this.nextMonthDays.push(i);
@@ -126,7 +128,7 @@ export class DiaryCalendarPageComponent implements OnInit {
     this.currentMonthName = this.monthNames[this.currentMonth];
   }
 
-// Navegar al mes anterior
+  // Navegar al mes anterior
   prevMonth(): void {
     if (this.currentMonth === 0) {
       this.currentMonth = 11;
@@ -135,6 +137,7 @@ export class DiaryCalendarPageComponent implements OnInit {
       this.currentMonth--;
     }
     this.generateCalendar();
+    this.loadEmotions(); // importante para actualizar el mes que ves
   }
 
   // Navegar al mes siguiente
@@ -146,99 +149,57 @@ export class DiaryCalendarPageComponent implements OnInit {
       this.currentMonth++;
     }
     this.generateCalendar();
+    this.loadEmotions(); // importante para actualizar el mes que ves
   }
 
-  //Verificar si hay un mood registrado en el día específico
+  // Verificar si hay una emoción registrada en el día
   hasMoodForDay(day: number): boolean {
-    const date = new Date(this.currentYear, this.currentMonth, day);
-    return this.moodEntries.some(entry =>
-      entry.date.getDate() === date.getDate() &&
-      entry.date.getMonth() === date.getMonth() &&
-      entry.date.getFullYear() === date.getFullYear()
-    );
+    const dateKey = this.getDateKey(day);
+    return !!this.emotionsPerDay[dateKey];
   }
 
-// Obtener el icono/imagen del estado de ánimo para un día específico
+  // Obtener la info del estado de ánimo para un día específico
   getMoodInfo(day: number): { image?: string, alt?: string } {
-    const date = new Date(this.currentYear, this.currentMonth, day);
-    const entry = this.moodEntries.find(entry =>
-      entry.date.getDate() === date.getDate() &&
-      entry.date.getMonth() === date.getMonth() &&
-      entry.date.getFullYear() === date.getFullYear()
-    );
+    const dateKey = this.getDateKey(day);
+    const emotionName = this.emotionsPerDay[dateKey];
+    const mood = this.availableMoods.find(mood => mood.name === emotionName);
 
-    if (entry && this.availableMoods.length > 0) {
-      const mood = this.availableMoods.find(mood => mood.id === entry.moodId);
-      if (mood) {
-        return {
-          image: mood.image,
-          alt: mood.alt
-        };
-      }
+    if (mood) {
+      return {
+        image: mood.image,
+        alt: mood.alt
+      };
     }
 
     return {};
   }
 
-  // Abrir el modal para seleccionar estado de ánimo
+  // Obtener la clave de la fecha en formato 'YYYY-MM-DD'
+  getDateKey(day: number): string {
+    const date = new Date(this.currentYear, this.currentMonth, day);
+    return date.toISOString().split('T')[0];
+  }
+
+  // Abrir modal
   openMoodModal(day: number): void {
     this.selectedDate = new Date(this.currentYear, this.currentMonth, day);
     this.resetModalForm();
-
-    // Verificar si ya existe una entrada para este día
-    const existingEntry = this.moodEntries.find(entry =>
-      entry.date.getDate() === this.selectedDate!.getDate() &&
-      entry.date.getMonth() === this.selectedDate!.getMonth() &&
-      entry.date.getFullYear() === this.selectedDate!.getFullYear()
-    );
-
-    if (existingEntry) {
-      this.selectedMood = this.availableMoods.find(mood => mood.id === existingEntry.moodId) || null;
-      this.dayNote = existingEntry.note || '';
-    }
-
     this.showModal = true;
   }
 
-  // Resetear el formulario del modal
+  // Resetear modal
   resetModalForm(): void {
     this.selectedMood = null;
     this.dayNote = '';
   }
 
-  // Métod que será llamado desde el componente modal
+  // Cuando el modal guarda una emoción → volver a cargar las emociones
   onMoodSaved(data: { moodId: number, note: string }): void {
-    if (!this.selectedDate) return;
-
-    // Comprobar si ya existe una entrada para este día
-    const existingEntryIndex = this.moodEntries.findIndex(entry =>
-      entry.date.getDate() === this.selectedDate!.getDate() &&
-      entry.date.getMonth() === this.selectedDate!.getMonth() &&
-      entry.date.getFullYear() === this.selectedDate!.getFullYear()
-    );
-
-    const newEntry: MoodEntry = {
-      date: this.selectedDate,
-      moodId: data.moodId,
-      note: data.note.trim() || undefined
-    };
-
-    if (existingEntryIndex !== -1) {
-      // Actualizar entrada existente
-      this.moodEntries[existingEntryIndex] = newEntry;
-    } else {
-      // Crear nueva entrada
-      this.moodEntries.push(newEntry);
-    }
-
-    // Guardar en localStorage
-    this.savedMoodEntries();
-
-    // Cerrar el modal
+    this.loadEmotions(); // Recargamos las emociones desde la BD
     this.closeModal();
   }
 
-  // Cerrar el modal
+  // Cerrar modal
   closeModal(): void {
     this.showModal = false;
   }

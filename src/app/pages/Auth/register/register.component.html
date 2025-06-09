@@ -6,6 +6,9 @@
       </div>
       <h2 class="form-title">Registro</h2>
 
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
       <input
         formControlName="name"
         placeholder="Nombre completo"

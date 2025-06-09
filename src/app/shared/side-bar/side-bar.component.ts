@@ -1,5 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -14,6 +15,7 @@ export class SideBarComponent {
   isMenuOpen = false;
 
   private router: Router = inject(Router)
+  private authService: AuthService = inject(AuthService);
 
   toggleMenu(event:Event) {
     if(window.innerWidth <= 768) {
@@ -22,8 +24,10 @@ export class SideBarComponent {
     }
   }
 
-  public logout(){
-    localStorage.removeItem('userData');
-    this.router.navigate(['/auth/login']);
+  public logout(): void {
+    this.authService.logout();
+
+    this.router.navigate(['/auth/login'], { state: { logoutSuccess: true } });
   }
+
 }

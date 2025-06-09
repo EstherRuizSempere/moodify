@@ -3,19 +3,22 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink, Router} from '@angular/router';
 import {AuthService} from '../../../../services/auth.service';
 import {take} from 'rxjs';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-register',
   imports: [
     RouterLink,
     ReactiveFormsModule,
+    NgIf,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  public registerForm: FormGroup;
+  public errorMessage: string = '';
 
-  registerForm: FormGroup
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
 
@@ -23,11 +26,15 @@ export class RegisterComponent {
     this.registerForm = new FormGroup({
       name: new FormControl(''),
       email: new FormControl(''),
-      password: new FormControl(''),
+      password: new FormControl('')
+    });
+
+    this.registerForm.valueChanges.subscribe(() => {
+      this.errorMessage = '';
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.registerForm.valid) {
       const { name, email, password } = this.registerForm.value;
 
@@ -35,11 +42,11 @@ export class RegisterComponent {
         if (response.status === 'success') {
           this.router.navigate(['/auth/login']);
         } else {
-          alert("Error en el registro");
+          this.errorMessage = response.message;
         }
-      })
+      });
     } else {
-      console.log('Formulario inválido');
+      this.errorMessage = 'Formulario inválido';
     }
   }
 }
