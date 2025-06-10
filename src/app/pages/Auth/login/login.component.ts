@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         if (response.status === 'success') {
           localStorage.setItem('userData', JSON.stringify(response.data));
           localStorage.setItem('user_id', response.data.id.toString());
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         } else {
           this.errorMessage = response.message;
         }

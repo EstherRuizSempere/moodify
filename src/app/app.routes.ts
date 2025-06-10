@@ -18,7 +18,10 @@ import {MemoryComponent} from './apis/memory/memory.component';
 import {AuthGuard} from './guards/auth.guard';
 import {SettingsPageComponent} from './pages/Aplication/settings-page/settings-page.component';
 import {ForgotPasswordComponent} from './pages/Auth/forgot-password/forgot-password.component';
+
 export const routes: Routes = [
+  {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+
   {
     path: 'auth',
     title: 'Moodify | Autentificación',
@@ -33,6 +36,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainPageComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -79,7 +83,7 @@ export const routes: Routes = [
       {
         path: 'settings',
         title: 'Moodify | Ajustes 🔩',
-        component:SettingsPageComponent,
+        component: SettingsPageComponent,
       },
       {
         path: 'apifun'
@@ -115,6 +119,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'auth/login',
+    pathMatch: 'full'
   }
 ];
