@@ -160,6 +160,7 @@ export class TrackPlayerService {
 
       // Registra que esta canción ha sido reproducida
       this.trackService.updateTrackPlayed(track.id);
+      console.log('Reproduciendo canción:', track.name);
 
       this.audioElement.load();
       this.audioElement.play()
@@ -326,11 +327,9 @@ export class TrackPlayerService {
     return currentTrack !== null && currentTrack.id === track.id;
   }
 
-  /**
-   * Limpia los recursos del reproductor cuando el servicio se destruye.
-   */
-  dispose(): void {
+  stop(): void{
     this.audioElement.pause();
-    this.audioElement.src = '';
+    this.audioElement.currentTime = 0;
+    this.isPlayingSubject.next(false);
   }
 }

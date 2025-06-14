@@ -1,53 +1,195 @@
-.fun-card {
+.gif-widget-container {
   background-color: var(--primary-color);
   border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 16px var(--medium-dark-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.gif-widget-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--medium-dark-color);
+  margin-bottom: 15px;
   text-align: center;
 }
 
-.gif-container img {
-  max-width: 300px;
-  margin-top: 15px;
-  border-radius: 12px;
+.gif-widget-subtitle {
+  font-size: 0.95rem;
+  color: var(--dark-color);
+  opacity: 0.8;
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 600px;
+  line-height: 1.4;
 }
 
-.fun-card button {
-  background-color: var(--complementary-medium-dark);
-  color: white;
+.gif-widget-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gif-button {
+  background: linear-gradient(135deg, var(--complementary-color), var(--complementary-medium-dark));
   border: none;
   border-radius: 12px;
-  padding: 10px 20px;
-  cursor: pointer;
+  padding: 12px 20px;
   font-size: 1rem;
-  margin-top: 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.fun-card button:hover {
-  background-color: var(--complementary-medium-dark-hover);
-  transform: scale(1.05);
+.gif-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, var(--complementary-medium-dark), var(--complementary-medium-dark-hover));
+}
+
+.gif-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--dark-color);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.gif-display {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--secondary-color);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.gif-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.gif-container img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.gif-container:hover img {
+  transform: scale(1.02);
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+  max-width: 400px;
+}
+
+.error-message p {
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 @media (max-width: 768px) {
-  .gif-container img {
-    max-width: 250px;
+  .game-widget-container {
+    padding: 20px;
   }
 
-  .fun-card button {
-    padding: 8px 16px;
-    font-size: 0.95rem;
+  .game-widget-title {
+    font-size: 1.6rem;
+  }
+
+  .game-widget-subtitle {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .gif-display {
+    padding: 15px;
+  }
+
+  .gif-container img {
+    max-height: 250px;
   }
 }
 
 @media (max-width: 480px) {
-  .gif-container img {
-    max-width: 200px;
+  .game-widget-container {
+    padding: 15px;
+    margin: 15px;
   }
 
-  .fun-card button {
-    padding: 8px 14px;
+  .game-widget-title {
+    font-size: 1.4rem;
+  }
+
+  .game-widget-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .gif-button {
+    padding: 10px 16px;
     font-size: 0.9rem;
+    min-width: 140px;
+  }
+
+  .gif-display {
+    padding: 12px;
+  }
+
+  .gif-container img {
+    max-height: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gif-button,
+  .gif-container img,
+  .loading-spinner {
+    transition: none;
+    animation: none;
   }
 }

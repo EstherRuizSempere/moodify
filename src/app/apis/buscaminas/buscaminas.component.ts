@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Cell} from '../../interfaces/cell';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-buscaminas',
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './buscaminas.component.html',
   styleUrl: './buscaminas.component.css',
@@ -13,7 +14,11 @@ import {NgForOf} from '@angular/common';
 })
 export class BuscaminasComponent implements OnInit {
   grid: Cell[] = [];
-  lives = 2;
+  lives = 3;
+  gameStatus: 'playing' | 'won' | 'lost' = 'playing';
+  revealedCells = 0;
+  totalSafeCells = 54; // 64 - 10 minas
+  gameStarted = false;
 
   ngOnInit() {
     this.generateGrid();
@@ -22,13 +27,19 @@ export class BuscaminasComponent implements OnInit {
   generateGrid() {
     const totalCells = 64;
     const mineCount = 10;
-    this.lives = 2;
-    this.grid = Array.from({ length: totalCells }, () => ({
+    this.lives = 3;
+    this.gameStatus = 'playing';
+    this.revealedCells = 0;
+    this.gameStarted = false;
+
+    this.grid = Array.from({length: totalCells}, () => ({
       isMine: false,
       revealed: false,
-      adjacentMines: 0
+      adjacentMines: 0,
+      flagged: false
     }));
 
+    // Colocar minas aleatoriamente
     let minesPlaced = 0;
     while (minesPlaced < mineCount) {
       const i = Math.floor(Math.random() * totalCells);
@@ -38,8 +49,11 @@ export class BuscaminasComponent implements OnInit {
       }
     }
 
+    // Calcular números adyacentes
     for (let i = 0; i < totalCells; i++) {
-      this.grid[i].adjacentMines = this.countAdjacentMines(i);
+      if (!this.grid[i].isMine) {
+        this.grid[i].adjacentMines = this.countAdjacentMines(i);
+      }
     }
   }
 
@@ -51,9 +65,11 @@ export class BuscaminasComponent implements OnInit {
     let count = 0;
     for (let r = row - 1; r <= row + 1; r++) {
       for (let c = col - 1; c <= col + 1; c++) {
-        const i = r * cols + c;
-        if (r >= 0 && c >= 0 && r < cols && c < cols && i !== index && this.grid[i]?.isMine) {
-          count++;
+        if (r >= 0 && c >= 0 && r < 8 && c < cols) {
+          const i = r * cols + c;
+          if (i !== index && this.grid[i]?.isMine) {
+            count++;
+          }
         }
       }
     }
@@ -61,21 +77,26 @@ export class BuscaminasComponent implements OnInit {
   }
 
   revealCell(index: number) {
-    const cell = this.grid[index];
-    if (cell.revealed) return;
+    if (this.gameStatus !== 'playing') return;
 
+    const cell = this.grid[index];
+    if (cell.revealed || cell.flagged) return;
+
+    this.gameStarted = true;
     cell.revealed = true;
+    this.revealedCells++;
 
     if (cell.isMine) {
       this.lives--;
       if (this.lives === 0) {
-        alert('💥 ¡Has perdido! Reiniciando...');
-        this.generateGrid();
-      } else {
-        alert(`⚠️ ¡Has pisado una mina! Te quedan ${this.lives} vida(s).`);
+        this.gameStatus = 'lost';
+        this.revealAllMines();
       }
-    } else if (cell.adjacentMines === 0) {
-      this.revealAdjacent(index);
+    } else {
+      if (cell.adjacentMines === 0) {
+        this.revealAdjacent(index);
+      }
+      this.checkWinCondition();
     }
   }
 
@@ -86,11 +107,68 @@ export class BuscaminasComponent implements OnInit {
 
     for (let r = row - 1; r <= row + 1; r++) {
       for (let c = col - 1; c <= col + 1; c++) {
-        const i = r * cols + c;
-        if (r >= 0 && c >= 0 && r < cols && c < cols && !this.grid[i]?.revealed) {
-          this.revealCell(i);
+        if (r >= 0 && c >= 0 && r < 8 && c < cols) {
+          const i = r * cols + c;
+          if (i !== index && !this.grid[i]?.revealed && !this.grid[i]?.flagged) {
+            this.revealCell(i);
+          }
         }
       }
     }
+  }
+
+  flagCell(event: MouseEvent, index: number) {
+    event.preventDefault();
+    if (this.gameStatus !== 'playing') return;
+
+    const cell = this.grid[index];
+    if (cell.revealed) return;
+
+    cell.flagged = !cell.flagged;
+  }
+
+  revealAllMines() {
+    this.grid.forEach(cell => {
+      if (cell.isMine) {
+        cell.revealed = true;
+      }
+    });
+  }
+
+  checkWinCondition() {
+    const safeCellsRevealed = this.grid.filter(cell => !cell.isMine && cell.revealed).length;
+    if (safeCellsRevealed === this.totalSafeCells) {
+      this.gameStatus = 'won';
+    }
+  }
+
+  resetGame() {
+    this.generateGrid();
+  }
+
+  getCellDisplay(cell: Cell): string {
+    if (!cell.revealed) {
+      return cell.flagged ? '🚩' : '';
+    }
+    if (cell.isMine) {
+      return '💣';
+    }
+    return cell.adjacentMines > 0 ? cell.adjacentMines.toString() : '';
+  }
+
+  getCellClass(cell: Cell): string {
+    let classes = '';
+    if (cell.revealed) {
+      classes += 'revealed ';
+      if (cell.isMine) {
+        classes += 'mine ';
+      } else if (cell.adjacentMines > 0) {
+        classes += `number-${cell.adjacentMines} `;
+      }
+    }
+    if (cell.flagged) {
+      classes += 'flagged ';
+    }
+    return classes.trim();
   }
 }

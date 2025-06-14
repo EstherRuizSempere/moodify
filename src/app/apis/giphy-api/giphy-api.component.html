@@ -1,8 +1,35 @@
-<div class="fun-card">
-  <h3>🎬 GIF Divertido</h3>
-  <button (click)="getGif()">🎲 Ver un GIF</button>
+<div class="gif-widget-container">
+  <h3 class="gif-widget-title">🎬 GIF Divertido</h3>
 
-  <div *ngIf="gifUrl" class="gif-container">
-    <img [src]="gifUrl" alt="Gif divertido" />
+  <div class="gif-widget-subtitle">
+    ¡Descubre GIFs divertidos para alegrar tu día! 🎉
+  </div>
+
+  <div class="gif-widget-content">
+    <button
+      class="gif-button"
+      (click)="getGif()"
+      [disabled]="loading"
+      [attr.aria-label]="loading ? 'Cargando GIF...' : 'Ver un GIF divertido'"
+    >
+      <span *ngIf="loading" class="loading-spinner" aria-hidden="true"></span>
+      <span *ngIf="!loading">🎲</span>
+      {{ loading ? 'Cargando...' : 'Nuevo GIF' }}
+    </button>
+
+    <div *ngIf="gifUrl && !loading" class="gif-display">
+      <div class="gif-container">
+        <img
+          [src]="gifUrl"
+          alt="GIF divertido aleatorio"
+          loading="lazy"
+          (error)="onImageError()"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      <p>😅 Ups, no se pudo cargar el GIF. ¡Inténtalo de nuevo!</p>
+    </div>
   </div>
 </div>

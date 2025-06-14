@@ -35,7 +35,7 @@
     <p>{{ track.album }}</p>
   </div>
 
-  <div class="track-date d-none d-lg-block">
+  <div class="track-date d-none d-lg-block" *ngIf="showPlayedAt && track.playedAt">
     <p>{{ track.playedAt | date:'shortDate' }}</p>
   </div>
 

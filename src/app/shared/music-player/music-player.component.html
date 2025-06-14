@@ -33,7 +33,6 @@
   </div>
 
   <div class="extra-controls">
-    <button class="control-btn"><i class="fas fa-list"></i></button>
     <div class="volume-control">
       <i class="fas" [ngClass]="volume === 0 ? 'fa-volume-mute' : volume < 0.5 ? 'fa-volume-down' : 'fa-volume-up'"></i>
       <div class="volume-slider" (click)="setVolume($event)">

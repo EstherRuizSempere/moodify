@@ -5,7 +5,7 @@
     "artist": "The Weeknd & Anitta",
     "album": "The Idol",
     "imageUrl": "assets/songs-image/sao-paulo.png",
-    "durationMs": 329000,
+    "durationMs": 209000,
     "songUrl": "assets/songs/sao-paulo.MP3"
   },
   {
@@ -14,7 +14,7 @@
     "artist": "Ramsey",
     "album": "Arcane OST",
     "imageUrl": "assets/songs-image/goodbye.png",
-    "durationMs": 351000,
+    "durationMs": 232000,
     "songUrl": "assets/songs/goodbye.MP3"
   },
   {
@@ -23,7 +23,7 @@
     "artist": "Lisa",
     "album": "Solo Leveling",
     "imageUrl": "assets/songs-image/rewake.png",
-    "durationMs": 312000,
+    "durationMs": 192000,
     "songUrl": "assets/songs/rewake.MP3"
   },
   {
@@ -32,7 +32,7 @@
     "artist": "League of Legends",
     "album": "League of Legends OST",
     "imageUrl": "assets/songs-image/bite-marks.png",
-    "durationMs": 310000,
+    "durationMs": 190000,
     "songUrl": "assets/songs/bite-marks.MP3"
   },
   {
@@ -41,7 +41,7 @@
     "artist": "Radwimps",
     "album": "Suzume OST",
     "imageUrl": "assets/songs-image/suzume.png",
-    "durationMs": 355000,
+    "durationMs": 235000,
     "songUrl": "assets/songs/suzume.MP3"
   },
   {
@@ -50,7 +50,7 @@
     "artist": "Various Artists",
     "album": "Solo Leveling OST",
     "imageUrl": "assets/songs-image/LEveL.png",
-    "durationMs": 302000,
+    "durationMs": 182000,
     "songUrl": "assets/songs/LEveL.MP3"
   },
   {
@@ -59,7 +59,7 @@
     "artist": "Hiroyuki Sawano",
     "album": "Solo Leveling",
     "imageUrl": "assets/songs-image/lv2.png",
-    "durationMs": 223000,
+    "durationMs": 142000,
     "songUrl": "assets/songs/lv2.MP3"
   },
   {
@@ -68,7 +68,7 @@
     "artist": "YOASOBI",
     "album": "Oshi no Ko",
     "imageUrl": "assets/songs-image/yaosabi.png",
-    "durationMs": 345000,
+    "durationMs": 225000,
     "songUrl": "assets/songs/yaosabi.MP3"
   },
   {
@@ -77,7 +77,296 @@
     "artist": "Jennie",
     "album": "La más top",
     "imageUrl": "assets/songs-image/like-jennie.png",
-    "durationMs": 204000,
+    "durationMs": 125000,
     "songUrl": "assets/songs/like-jennie.MP3"
+  },
+  {
+    "id": "10",
+    "name": "Coco Taxi",
+    "artist": "Abor YTynna",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/coco-taxi.png",
+    "durationMs": 147000,
+    "songUrl": "assets/songs/AborYTynna-CocoTaxi.MP3"
+  },
+  {
+    "id": "11",
+    "name": "Ordinary",
+    "artist": "Alex Warren",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/ordinary.png",
+    "durationMs": 187000,
+    "songUrl": "assets/songs/AlexWarren-Ordinary.MP3"
+  },
+  {
+    "id": "12",
+    "name": "I Like the Way You Kiss Me",
+    "artist": "Artemas",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/ilike-the-way-you-kiss-me.png",
+    "durationMs": 155000,
+    "songUrl": "assets/songs/Artemas-ILikeTheWayYouKissMe.MP3"
+  },
+  {
+    "id": "13",
+    "name": "Beller (English)",
+    "artist": "Abor Y Tynna",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/beller-english.png",
+    "durationMs": 178000,
+    "songUrl": "assets/songs/AborYTynna-beller-english.MP3"
+  },
+  {
+    "id": "14",
+    "name": "Beller (Official)",
+    "artist": "Abor Y Tynna",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/beller-oficial.png",
+    "durationMs": 166000,
+    "songUrl": "assets/songs/AboyrYTina-beller-oficial.MP3"
+  },
+  {
+    "id": "15",
+    "name": "Chachacha",
+    "artist": "Käärijä",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/kaarija-chachacha.png",
+    "durationMs": 176000,
+    "songUrl": "assets/songs/Kaarija-chachacha.MP3"
+  },
+  {
+    "id": "16",
+    "name": "#eurodab#eurodab Chachacha Rim Tim Tagi Dim",
+    "artist": "Käärijä & Baby Lasagna",
+    "album": "Eurovision 2025 / EuroDab",
+    "imageUrl": "assets/songs-image/lasagna-chachacha-rimtimta-gidim.png",
+    "durationMs": 116000,
+    "songUrl": "assets/songs/KaarijaYBaby Lasagna-chachacharimtimtagidim.MP3"
+  },
+  {
+    "id": "17",
+    "name": "Good Luck Babe",
+    "artist": "Chappell Roan",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/good-luck-babe.png",
+    "durationMs": 218000,
+    "songUrl": "assets/songs/Chappell Roan-GoodLuckBabe.MP3"
+  },
+  {
+    "id": "18",
+    "name": "Cleopatra",
+    "artist": "Efendi",
+    "album": "Eurovisión",
+    "imageUrl": "assets/songs-image/cleopatra.png",
+    "durationMs": 180000,
+    "songUrl": "assets/songs/Eurovision-cleopatra.MP3"
+  },
+  {
+    "id": "19",
+    "name": "Beautiful People",
+    "artist": "David Guetta Y Sia",
+    "album": "Listen",
+    "imageUrl": "assets/songs-image/beautiful-people.png",
+    "durationMs": 204000,
+    "songUrl": "assets/songs/DavidGuettaYSia-BeautifulPeople.MP3"
+  },
+  {
+    "id": "20",
+    "name": "Disease",
+    "artist": "Lady Gaga",
+    "album": "MAYHEM",
+    "imageUrl": "assets/songs-image/disease.png",
+    "durationMs": 230000,
+    "songUrl": "assets/songs/ladyGaga-disease.MP3"
+  },
+  {
+    "id": "21",
+    "name": "Ego",
+    "artist": "Valorant",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/ego.png",
+    "durationMs": 259000,
+    "songUrl": "assets/songs/Valorant-ego.MP3"
+  },
+  {
+    "id": "22",
+    "name": "Eurodab",
+    "artist": "Käärijä & Baby Lasagna Artists",
+    "album": "#eurodab",
+    "imageUrl": "assets/songs-image/eurodab.png",
+    "durationMs": 380000,
+    "songUrl": "assets/songs/eurodab.MP3"
+  },
+  {
+    "id": "23",
+    "name": "Milkshake Man",
+    "artist": "Go‑Jo",
+    "album": "Eurovision",
+    "imageUrl": "assets/songs-image/milkshake-man.png",
+    "durationMs": 174000,
+    "songUrl": "assets/songs/Go-Jo-Milkshake Man.MP3"
+  },
+  {
+    "id": "24",
+    "name": "Iconic",
+    "artist": "Sara Bee",
+    "album": "Baddie Issues",
+    "imageUrl": "assets/songs-image/iconic.png",
+    "durationMs": 118000,
+    "songUrl": "assets/songs/iconic.MP3"
+  },
+  {
+    "id": "25",
+    "name": "Fast Car",
+    "artist": "Jonas Blue",
+    "album": "Sencillo",
+    "imageUrl": "assets/songs-image/fast-car.png",
+    "durationMs": 215000,
+    "songUrl": "assets/songs/Jonas Blue-FastCar.MP3"
+  },
+  {
+    "id": "26",
+    "name": "Die Young",
+    "artist": "Kesha",
+    "album": "Warrior",
+    "imageUrl": "assets/songs-image/die-young.png",
+    "durationMs": 212000,
+    "songUrl": "assets/songs/kesha-dieyoung.MP3"
+  },
+  {
+    "id": "27",
+    "name": "Lighter",
+    "artist": "Kylie Alessandro",
+    "album": "Eurovision",
+    "imageUrl": "assets/songs-image/lighter.png",
+    "durationMs": 175000,
+    "songUrl": "assets/songs/kylieAlessandro-Lighter.MP3"
+  },
+  {
+    "id": "28",
+    "name": "Make You Mine",
+    "artist": "Madison Beer",
+    "album": "Make You Mine",
+    "imageUrl": "assets/songs-image/make-you-mine.png",
+    "durationMs": 225000,
+    "songUrl": "assets/songs/MadisonBeer-MakeYouMine.MP3"
+  },
+  {
+    "id": "29",
+    "name": "ZITTI E BUONI",
+    "artist": "Maneskin",
+    "album": "Eurovision",
+    "imageUrl": "assets/songs-image/zitti-e-buoni.png",
+    "durationMs": 198000,
+    "songUrl": "assets/songs/Maneskin-ZITTI E BUONI.MP3"
+  },
+  {
+    "id": "30",
+    "name": "Counting Stars",
+    "artist": "OneRepublic",
+    "album": "Native",
+    "imageUrl": "assets/songs-image/counting-stars.png",
+    "durationMs": 283000,
+    "songUrl": "assets/songs/OneRepublic-CountingStars.MP3"
+  },
+  {
+    "id": "31",
+    "name": "Porese Hombre",
+    "artist": " Miranda! - Abraham Mateo",
+    "album": "Single",
+    "imageUrl": "assets/songs-image/poresehombre.png",
+    "durationMs": 256000,
+    "songUrl": "assets/songs/poresehombre.MP3"
+  },
+  {
+    "id": "32",
+    "name": "Human",
+    "artist": "Rag'n'Bone Man",
+    "album": "Human",
+    "imageUrl": "assets/songs-image/human.png",
+    "durationMs": 197000,
+    "songUrl": "assets/songs/RagnBoneMan-Human.MP3"
+  },
+  {
+    "id": "33",
+    "name": "Rim Tim Tagi Dim",
+    "artist": "Baby Lasagna",
+    "album": "Eurovision",
+    "imageUrl": "assets/songs-image/rimtigtagidim.png",
+    "durationMs": 178000,
+    "songUrl": "assets/songs/rimtigtagidim.MP3"
+  },
+  {
+    "id": "34",
+    "name": "APT",
+    "artist": "Rose Y Bruno Mars",
+    "album": "Sencillo",
+    "imageUrl": "assets/songs-image/apt.png",
+    "durationMs": 173000,
+    "songUrl": "assets/songs/RoseYBrunoMars-APT.MP3"
+  },
+  {
+    "id": "35",
+    "name": "Espresso",
+    "artist": "Sabrina Carpenter",
+    "album": "Short n' Sweet",
+    "imageUrl": "assets/songs-image/espresso.png",
+    "durationMs": 200000,
+    "songUrl": "assets/songs/SabrinaCarpenter-Espresso.MP3"
+  },
+  {
+    "id": "36",
+    "name": "Shum",
+    "artist": "Go_A",
+    "album": "Eurovision",
+    "imageUrl": "assets/songs-image/shum.png",
+    "durationMs": 173000,
+    "songUrl": "assets/songs/shum.MP3"
+  },
+  {
+    "id": "37",
+    "name": "Shum (Remix)",
+    "artist": "Go_A",
+    "album": "Eurovision Remix",
+    "imageUrl": "assets/songs-image/shum.png",
+    "durationMs": 177000,
+    "songUrl": "assets/songs/shum-remix.MP3"
+  },
+  {
+    "id": "38",
+    "name": "Still Here",
+    "artist": "League of Legends",
+    "album": "Sencillo",
+    "imageUrl": "assets/songs-image/still-here.png",
+    "durationMs": 180000,
+    "songUrl": "assets/songs/stillhere.MP3"
+  },
+  {
+    "id": "39",
+    "name": "I wanna ruin our friendship",
+    "artist": "Studio Killers",
+    "album": "Jennie",
+    "imageUrl": "assets/songs-image/jeni.png",
+    "durationMs": 230000,
+    "songUrl": "assets/songs/StudioKillers-Jeni.MP3"
+  },
+  {
+    "id": "40",
+    "name": "Bad Dreams",
+    "artist": "Teddy Swims",
+    "album": "Sencillo",
+    "imageUrl": "assets/songs-image/bad-dreams.png",
+    "durationMs": 184000,
+    "songUrl": "assets/songs/Teddy Swims-Bad Dreams.MP3"
+  },
+  {
+    "id": "41",
+    "name": "10:35",
+    "artist": "Tiësto Featuring Tate McRae",
+    "album": "Drive",
+    "imageUrl": "assets/songs-image/10-35.png",
+    "durationMs": 180000,
+    "songUrl": "assets/songs/Tiësto-1035.MP3"
   }
 ]
+

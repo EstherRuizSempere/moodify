@@ -1,3 +1,12 @@
+.page-sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-container {
+  padding: 20px;
+}
+
 .history-header {
   display: flex;
   justify-content: space-between;
@@ -17,7 +26,6 @@
   background: var(--primary-color);
   box-shadow: 0 6px 16px var(--medium-dark-color);
 }
-
 
 .history-filters {
   display: flex;
@@ -146,6 +154,49 @@
   opacity: 0.7;
 }
 
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+.pagination-controls button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  color: var(--medium-dark-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: var(--complementary-medium-dark);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination-controls span {
+  font-size: 1rem;
+  color: var(--dark-color);
+  font-weight: 500;
+  margin: 0 10px;
+}
+
 @media (max-width: 992px) {
   .history-header {
     margin-bottom: 20px;
@@ -223,7 +274,6 @@
   }
 }
 
-/* Agregar regla para pantallas muy pequeñas */
 @media (max-width: 420px) {
   .history-filters {
     flex-direction: column;

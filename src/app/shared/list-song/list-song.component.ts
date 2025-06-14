@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {DatePipe, NgClass} from '@angular/common';
+import {DatePipe, NgClass, NgIf} from '@angular/common';
 import {Track} from '../../interfaces/track';
 import {Subscription} from 'rxjs';
 import {TrackPlayerService} from '../../../services/track-player.service';
@@ -8,7 +8,8 @@ import {TrackPlayerService} from '../../../services/track-player.service';
   selector: 'app-list-song',
   imports: [
     NgClass,
-    DatePipe
+    DatePipe,
+    NgIf
   ],
   templateUrl: './list-song.component.html',
   styleUrl: './list-song.component.css'
@@ -19,6 +20,8 @@ export class ListSongComponent implements OnInit, OnDestroy {
   @Input() index!: number;
   @Input() isPlaying: boolean = false;
   @Input() isFavorite: boolean = false;
+  @Input() showPlayedAt: boolean = false;
+
 
   @Output() play = new EventEmitter<Track>();
   @Output() like = new EventEmitter<Track>();

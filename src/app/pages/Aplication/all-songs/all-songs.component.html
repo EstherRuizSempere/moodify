@@ -1,0 +1,77 @@
+<div class="page-sections">
+  <div class="all-songs-container">
+    <div class="songs-header">
+      <h1>Todas las canciones</h1>
+      <div class="songs-filters">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Buscar canciones"
+            [(ngModel)]="searchTerm"
+            (input)="filterTracks()">
+        </div>
+        <div class="genre-filter">
+          <select [(ngModel)]="genreFilter" (change)="filterTracks()">
+            <option value="all">Todos los álbumes</option>
+            @for (genre of availableGenres; track genre) {
+              <option [value]="genre">{{ genre }}</option>
+            }
+          </select>
+        </div>
+        <div class="sort-filter">
+          <select [(ngModel)]="sortOrder" (change)="filterTracks()">
+            <option value="default">Orden original</option>
+            <option value="a-z">A - Z</option>
+            <option value="z-a">Z - A</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="songs-list-header">
+      <div class="header-number">#</div>
+      <div class="header-title">TÍTULO</div>
+      <div class="header-album d-none d-md-block">ÁLBUM</div>
+      <div class="header-duration">
+        <i class="far fa-clock"></i>
+      </div>
+    </div>
+
+    <div class="track-list">
+      @for (track of paginatedTracks; track track.id; let i = $index) {
+        <app-list-song
+          [track]="track"
+          [index]="getGlobalIndex(i)"
+          [isPlaying]="currentlyPlayingId === track.id"
+          [showPlayedAt]="false"
+          (play)="onPlayTrack($event)"
+          (like)="onLikeTrack($event)">
+        </app-list-song>
+      }
+    </div>
+
+    @if (paginatedTracks.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">
+          <i class="fas fa-music"></i>
+        </div>
+        <h3>No se encontraron canciones</h3>
+        @if (searchTerm || genreFilter !== 'all') {
+          <p>No hay resultados para tu búsqueda</p>
+        }
+        @if (!searchTerm && genreFilter === 'all') {
+          <p>¡Parece que no se pudieron cargar las canciones!</p>
+        }
+      </div>
+    }
+
+    @if (totalPages > 1) {
+      <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+      </div>
+    }
+  </div>
+</div>

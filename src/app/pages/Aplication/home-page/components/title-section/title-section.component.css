@@ -1,14 +1,28 @@
-.main-title{
+.main-title {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.main-title h1{
+.main-title h1 {
   font-size: 4.5rem;
 }
 
-.img-container{
+.img-container {
   width: 150px;
   margin-right: 20px;
 }
+
+@media (max-width: 768px) {
+  .main-title h1 {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+
+  .img-container {
+    width: 100px;
+    margin-right: 20px;
+
+  }
+}
+

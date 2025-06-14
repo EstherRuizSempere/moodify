@@ -1,8 +1,33 @@
 <div class="game-widget-container">
-  <h3 class="game-widget-title">🧠 Juego de parejas</h3>
+  <h3 class="game-widget-title">🧠 Juego de Memoria</h3>
 
-  <div class="game-widget-subtitle">
-    Encuentra las parejas de imágenes. ¡Memoriza bien! 🖼️
+  <div class="game-info">
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-label">Movimientos:</span>
+        <span class="stat-value">{{ moves }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Parejas:</span>
+        <span class="stat-value">{{ matches }}/{{ images.length }}</span>
+      </div>
+    </div>
+
+    <div class="game-controls">
+      <button class="reset-btn" (click)="resetGame()">🔄 Nuevo Juego</button>
+    </div>
+  </div>
+
+  <div class="game-status" *ngIf="gameStatus === 'won'">
+    <div class="status-message won">
+      <div class="win-title">🎉 ¡Felicidades!</div>
+      <div class="win-subtitle">{{ getPerformanceMessage() }}</div>
+      <div class="win-stats">Completado en {{ moves }} movimientos</div>
+    </div>
+  </div>
+
+  <div class="game-widget-subtitle" *ngIf="gameStatus === 'playing'">
+    Encuentra las parejas de imágenes. ¡Memoriza bien las posiciones! 🖼️
   </div>
 
   <div class="game-widget-content">
@@ -10,11 +35,15 @@
       <div *ngFor="let card of cards; index as i"
            class="memory-card"
            [class.flipped]="card.flipped || card.matched"
+           [class.matched]="card.matched"
+           [class.checking]="isChecking"
            (click)="flipCard(i)">
         <div class="card-inner">
-          <div class="card-front"></div>
+          <div class="card-front">
+            <div class="card-pattern">🎯</div>
+          </div>
           <div class="card-back">
-            <img [src]="card.image" alt="Card image">
+            <img [src]="card.image" alt="Carta de memoria" loading="lazy">
           </div>
         </div>
       </div>

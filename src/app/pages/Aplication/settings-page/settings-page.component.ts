@@ -1,10 +1,11 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NgIf} from '@angular/common';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from '../../../../services/auth.service';
 import {take} from 'rxjs';
 import {Router} from '@angular/router';
+import {UpdateService} from '../../../../services/update.service';
+import {DeleteService} from '../../../../services/delete.service';
 
 @Component({
   selector: 'app-settings-page',
@@ -21,7 +22,8 @@ export class SettingsPageComponent implements OnInit {
   public errorMessage: string = '';
 
   private authService: AuthService = inject(AuthService);
-  private http: HttpClient = inject(HttpClient);
+  private updateService: UpdateService = inject(UpdateService);
+  private deleteService: DeleteService = inject(DeleteService);
   private router: Router = inject(Router);
 
   constructor() {
@@ -33,7 +35,6 @@ export class SettingsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Cargar datos actuales del usuario desde localStorage pòr si no me va el backend
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
     this.settingsForm.patchValue({
       name: userData.name || '',
@@ -46,18 +47,7 @@ export class SettingsPageComponent implements OnInit {
       const formData = this.settingsForm.value;
       const userId = this.authService.getUserId();
 
-      const headers = new HttpHeaders().append(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      );
-
-      const body = new HttpParams()
-        .set('user_id', userId.toString())
-        .set('name', formData.name)
-        .set('email', formData.email)
-        .set('password', formData.password || '');
-
-      this.http.post<any>('http://moodify.test/back/endpoints/users/update_profile.php', body, {headers})
+      this.updateService.updateProfile(userId, formData.name, formData.email, formData.password || '')
         .pipe(take(1))
         .subscribe({
           next: (response) => {
@@ -65,7 +55,6 @@ export class SettingsPageComponent implements OnInit {
               this.successMessage = 'Perfil actualizado correctamente.';
               this.errorMessage = '';
 
-              // Actualizamos userData en localStorage
               localStorage.setItem('userData', JSON.stringify(response.data));
             } else {
               this.errorMessage = response.message;
@@ -84,22 +73,12 @@ export class SettingsPageComponent implements OnInit {
     const userId = this.authService.getUserId();
 
     if (confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')) {
-      const headers = new HttpHeaders().append(
-        'Content-Type',
-        'application/x-www-form-urlencoded'
-      );
-
-      const body = new HttpParams().set('user_id', userId.toString());
-
-      this.http.post<any>('http://moodify.test/back/endpoints/users/delete_user.php', body, { headers })
+      this.deleteService.deleteUser(userId)
         .pipe(take(1))
         .subscribe({
           next: (response) => {
             if (response.status === 'success') {
-              // Limpiar localStorage y logout
               this.authService.logout();
-
-              // Redirigir al login con mensaje
               this.router.navigate(['/auth/login'], {
                 queryParams: { deleted: 'true' }
               });

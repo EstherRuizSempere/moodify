@@ -1,0 +1,21 @@
+<div class="playlist-card" [ngClass]="{'hovered': isHovered, 'playing': isPlaying}" (mouseenter)="isHovered = true"
+     (mouseleave)="isHovered = false">
+  <div class="playlist-image-container">
+    <img [src]="playlist.image || 'assets/images/default-playlist.png'" [alt]="playlist.name + ' cover'" class="playlist-image">
+    @if (isHovered || isPlaying) {
+      <div class="play-button-overlay" (click)="playPlaylist()">
+        <button class="play-button">
+          @if (isPlaying) {
+            <i class="fas fa-pause"></i>
+          } @else {
+            <i class="fas fa-play"></i>
+          }
+        </button>
+      </div>
+    }
+  </div>
+  <div class="playlist-info">
+    <h3 class="playlist-title" [ngClass]="{'text-playing': isPlaying}">{{ playlist.name }}</h3>
+    <p class="playlist-tracks">{{ playlist.trackIds.length }} {{ playlist.trackIds.length === 1 ? 'canción' : 'canciones' }}</p>
+  </div>
+</div>

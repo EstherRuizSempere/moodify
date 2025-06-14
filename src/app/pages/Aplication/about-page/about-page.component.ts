@@ -17,27 +17,27 @@ export class AboutPageComponent {
     ],
     features: [
       {
-        title: 'Análisis Emocional',
-        description: 'Nunca anotar como ha ido tu día ha sido tan fácil',
+        title: 'Análisis Emocional 🧠',
+        description: 'Nunca anotar como ha ido tu día ha sido tan fácil 😀',
         icon: 'fa fa-heart-pulse'
       },
       {
-        title: 'Playlists Personalizadas',
-        description: 'Recomendaciones musicales únicas basadas en tus emociones',
+        title: 'Playlists según tu mood 🌸',
+        description: 'Elegidas personalmente por Moodify para ti, no cantar a pleno pulmón no es opción 👩🏼‍🎤',
         icon: 'fa fa-music'
       },
       {
-        title: 'Seguimiento del Bienestar',
-        description: 'Monitorea cómo la música afecta positivamente tu estado anímico',
-        icon: 'fa fa-chart-line'
+        title: 'Gráficos personalizados 🍩',
+        description: '¿Cuántas veces nos pasa que no sabemos como sentimos? ¿Solemos estar más enfadados o felices? Moodify te ayuda a descubrirlo. 🫂',
+        icon: 'fa fa-chart-pie'
       }
     ]
   };
 
   aboutMe = {
-    name: 'Tu Nombre',
-    role: 'Desarrollador de Moodify',
-    bio: 'Apasionado por la música y la tecnología, creé Moodify para unir estas dos pasiones. Creo firmemente que la música tiene el poder de transformar nuestro estado de ánimo y mejorar nuestra calidad de vida.',
-    imageUrl: 'assets/about/developer.jpg' // Reemplaza con la ruta a tu imagen
+    name: 'Esther Ruiz Sempere',
+    role: 'Desarrolladora de Moodify',
+    bio: 'Antigua maquilladora y futura desarrolladora web. Me encanta aprender y crear cosas nuevas. ' +'Moodify no nace de mi y mis experiencias personales, de la necesidad de crecer, desconectar y sentir.',
+    imageUrl: 'assets/images/P1030668.jpeg'
   };
 }

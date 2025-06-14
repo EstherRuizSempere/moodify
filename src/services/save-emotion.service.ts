@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class SaveEmotionService {
       .set('emotion', emotion)
       .set('comments', comments);
 
-    return this.http.post('http://moodify.test/back/endpoints/users/save_emotion.php', body, { headers });
+    return this.http.post(environment.moodifyApiUrl+'users/save_emotion.php', body, { headers });
   }
 
   public listEmotions(user_id: number) {
@@ -32,6 +33,6 @@ export class SaveEmotionService {
     const body = new HttpParams()
       .set('user_id', user_id.toString());
 
-    return this.http.post('http://moodify.test/back/endpoints/users/list_emotions.php', body, { headers });
+    return this.http.post(environment.moodifyApiUrl+'users/list_emotions.php', body, { headers });
   }
 }

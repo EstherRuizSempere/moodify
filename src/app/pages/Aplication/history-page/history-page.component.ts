@@ -17,10 +17,17 @@ import { TrackPlayerService } from '../../../../services/track-player.service';
 export class HistoryPageComponent implements OnInit {
   historyTracks: Track[] = [];
   filteredTracks: Track[] = [];
+  paginatedTracks: Track[] = [];
   currentlyPlayingId: string | number | null = null;
 
+  // Filtros
   searchTerm: string = '';
   timeFilter: string = 'all';
+
+  // Paginación
+  currentPage: number = 1;
+  pageSize: number = 7;
+  totalPages: number = 1;
 
   constructor(
     private trackService: TrackService,
@@ -41,21 +48,43 @@ export class HistoryPageComponent implements OnInit {
 
     // Suscribirse a cambios en el estado de reproducción
     this.trackPlayerService.isPlaying$.subscribe(isPlaying => {
-      // Si no está reproduciendo, podríamos querer actualizar algo en la UI
       if (!isPlaying) {
-        // Opcional: Hacer algo cuando se pausa la reproducción
       }
     });
   }
 
   loadTrackData() {
+    //Cargo las canciones
     this.trackService.getData().subscribe({
       next: (tracks) => {
-        this.historyTracks = tracks.map(track => ({
-          ...track,
-          playedAt: track.playedAt || new Date() // Si no tiene playedAt, asignamos la fecha actual
-        }));
-        this.filterTracks();
+        //Cargo el historial de canciones desde el backend
+        this.trackService.getHistory().subscribe({
+          next:(history) => {
+            //history será mi array de track id y playedAt
+            //Mapeo el historial con las canciones
+            const historyTracks: Track[] = history.map(item => {
+              const track = tracks.find(t => t.id.toString() === item.track_id.toString());
+              if (track) {
+                return {
+                  ...track,
+                  playedAt: new Date(item.played_at)
+                };
+              } else {
+                console.warn(`Track con id ${item.track_id} no encontrado en el JSON`);
+                return null;
+              }
+            }).filter(t => t !== null) as Track[];
+
+            // Guardamos el historial procesado
+            this.historyTracks = historyTracks;
+
+            // Aplicamos los filtros y paginación
+            this.filterTracks();
+          },
+          error: (error) => {
+            console.error('Error al cargar el historial:', error);
+          }
+        });
       },
       error: (error) => {
         console.error('Error al cargar las canciones:', error);
@@ -101,6 +130,39 @@ export class HistoryPageComponent implements OnInit {
     }
 
     this.filteredTracks = filtered;
+
+    // Reiniciar paginación
+    this.currentPage = 1;
+    this.totalPages = Math.ceil(this.filteredTracks.length / this.pageSize);
+    this.updatePagination();
+  }
+
+  // Actualiza la paginación según la página actual y el tamaño de página
+  updatePagination() {
+    // Calcula los índices de inicio y fin para la paginación
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    // Actualiza la lista de canciones paginadas
+    this.paginatedTracks = this.filteredTracks.slice(startIndex, endIndex);
+  }
+
+  // Método para obtener el índice global de la canción (considerando la paginación)
+  getGlobalIndex(localIndex: number): number {
+    return (this.currentPage - 1) * this.pageSize + localIndex;
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
   }
 
   onPlayTrack(event: any) {
@@ -117,10 +179,8 @@ export class HistoryPageComponent implements OnInit {
     // Busca la canción en el historial
     const track = this.historyTracks.find(t => t.id === event.id);
     if (track) {
-      // Utiliza el servicio TrackPlayerService para dar like
       this.trackPlayerService.toggleLike(track);
-      // Actualiza el historial para reflejar el cambio
-      this.loadTrackData();
+      track.isLiked = !track.isLiked; // Cambia el estado de like
     }
   }
 }

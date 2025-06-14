@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "Canciones en inglés 👩🏼‍🎤",
+    "trackIds": ["1", "2", "4", "9"],
+    "image": "assets/playlists/english.png"
+  },
+  {
+    "id": "2",
+    "name": "Anime 🍙",
+    "trackIds": ["8", "7", "6", "5", "3"],
+    "image": "assets/playlists/anime.png"
+  },
+  {
+    "id": "3",
+    "name": "Dance Pop 💃",
+    "trackIds": ["1", "12", "15", "19", "25", "35"],
+    "image": "assets/playlists/dance-pop.png"
+  },
+  {
+    "id": "4",
+    "name": "Good Vibes Playlist 🌞",
+    "trackIds": ["2", "9", "11", "17", "30", "32"],
+    "image": "assets/playlists/goodvibes-playlist.png"
+  },
+  {
+    "id": "5",
+    "name": "Party Mix Playlist 🎉",
+    "trackIds": ["15", "16", "22", "27", "28", "39"],
+    "image": "assets/playlists/party-mix-playlist.png"
+  },
+  {
+    "id": "6",
+    "name": "Playlist Eurovision 🇪🇺",
+    "trackIds": ["16", "18", "22", "23", "29", "33", "36", "37"],
+    "image": "assets/playlists/playlist-eurovision.png"
+  }
+]

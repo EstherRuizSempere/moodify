@@ -1,1 +1,61 @@
-<p>graphic-moods-page works!</p>
+<div class="graphics-section">
+  <div class="section-header">
+    <h2 class="section-title">Estadísticas de emociones</h2>
+  </div>
+
+  <div class="section-subtitle">
+    <p>Visualiza el patrón de tus emociones y descubre cómo te sientes más frecuentemente.</p>
+    <p>¡Conocerte mejor es el primer paso hacia el bienestar! 📊✨</p>
+  </div>
+
+  <div class="chart-container">
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Cargando tus estadísticas...</p>
+    </div>
+
+    <div *ngIf="hasError && !isLoading" class="error-state">
+      <div class="error-icon">😔</div>
+      <h3 class="error-title">Ups, algo salió mal</h3>
+      <p class="error-message">{{ errorMessage }}</p>
+      <button class="retry-button" (click)="retryLoad()">
+        <i class="fas fa-redo"></i>
+        Intentar de nuevo
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && !hasError && emotionData.length > 0" class="chart-wrapper">
+      <div class="chart-header">
+        <h3 class="chart-title">Tu mapa emocional</h3>
+        <p class="chart-description">Basado en tus registros de emociones</p>
+      </div>
+
+      <div class="chart-canvas">
+        <canvas #doughnutChartCanvas></canvas>
+      </div>
+
+      <div class="chart-footer">
+        <div class="stats-summary">
+          <div class="stat-item">
+            <span class="stat-number">{{ getEmotionTypesCount() }}</span>
+            <span class="stat-label">Tipos de emociones</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{{ getTotalCount() }}</span>
+            <span class="stat-label">Registros totales</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && !hasError && emotionData.length === 0" class="empty-state">
+      <div class="empty-icon">🌱</div>
+      <h3 class="empty-title">¡Comienza tu viaje emocional!</h3>
+      <p class="empty-message">Aún no tienes emociones registradas. Empieza a llevar tu diario emocional para ver tus estadísticas aquí.</p>
+      <button class="start-button" routerLink="/diary">
+        <i class="fas fa-plus"></i>
+        Registrar primera emoción
+      </button>
+    </div>
+  </div>
+</div>

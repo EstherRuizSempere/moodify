@@ -14,6 +14,7 @@ import {AuthService} from '../../../services/auth.service';
 export class SideBarComponent {
   isMenuOpen = false;
 
+
   private router: Router = inject(Router)
   private authService: AuthService = inject(AuthService);
 

@@ -1,14 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CardSongComponent} from '../../../../../shared/card-song/card-song.component';
 import {Track} from '../../../../../interfaces/track';
 import {Subscription} from 'rxjs';
 import {TrackService} from '../../../../../../services/track.service';
 import {CommonModule} from '@angular/common';
+import {CardPlaylistComponent} from '../../../../../shared/card-playlist/card-playlist.component';
+import {PlayListService} from '../../../../../../services/play-list.service';
+import {Playlists} from '../../../../../interfaces/playlists';
 
 @Component({
   selector: 'app-album-song-section',
   imports: [
-    CardSongComponent, CommonModule
+    CommonModule, CardPlaylistComponent
   ],
   templateUrl: './album-song-section.component.html',
   styleUrl: './album-song-section.component.css'
@@ -16,9 +18,14 @@ import {CommonModule} from '@angular/common';
 export class AlbumSongSectionComponent implements OnInit, OnDestroy {
 
   tracksRandom: Array<Track> = [];
+  playlists: Array<Playlists> = [];
+
   listObservers$: Array<Subscription> = [];
 
-  constructor(private trackService: TrackService) {
+  constructor(
+    private trackService: TrackService,
+    private playlistService: PlayListService
+  ) {
   }
 
   ngOnInit() {
@@ -29,7 +36,14 @@ export class AlbumSongSectionComponent implements OnInit, OnDestroy {
         console.log('Respuesta de la API:', respuesta);
       });
 
-    this.listObservers$.push(observer1$);
+    const observer2$ = this.playlistService
+      .getPlaylists()
+      .subscribe((respuesta: Playlists[]) => {
+        this.playlists = respuesta;
+        console.log('Playlists cargadas:', respuesta);
+      });
+
+    this.listObservers$.push(observer1$, observer2$);
   }
 
   ngOnDestroy() {

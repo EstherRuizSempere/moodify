@@ -1,9 +1,9 @@
 <div class="albums-container">
-  <h2 class="section-title">Canciones Recientes</h2>
+  <h2 class="section-title">Playlists 🎵</h2>
 
   <div class="albums-grid">
-    @for (track of tracksRandom; track track.id) {
-      <app-card-song [track]="track" />
+    @for (playlist of playlists; track playlist.id) {
+      <app-card-playlist [playlist]="playlist" />
     }
   </div>
 </div>

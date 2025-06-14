@@ -8,7 +8,6 @@
   font-size: 1.1rem;
 }
 
-/* Estilos para la sección About Moodify */
 .about-section {
   margin-bottom: 3rem;
   padding: 2rem;
@@ -92,9 +91,8 @@
   line-height: 1.5;
 }
 
-/* Estilos para la sección About Me */
 .about-me {
-  background-color: var(--complementary-medium-dark);
+  background-color: var(--primary-color);
   padding: 2rem;
 }
 
@@ -139,23 +137,22 @@
 
 .profile-name {
   font-size: 1.8rem;
-  color: var(--primary-color);
+  color: var(--complementary-medium-dark-hover);
   margin-bottom: 0.5rem;
 }
 
 .profile-role {
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: var(--complementary-medium-dark-hover);
   margin-bottom: 1rem;
   font-style: italic;
 }
 
 .profile-bio {
-  color: var(--primary-color);
+  color: var(--dark-color);
   line-height: 1.6;
 }
 
-/* Estilos responsive */
 @media (max-width: 768px) {
   .about-container {
     padding: 1rem;
@@ -173,9 +170,13 @@
     grid-template-columns: 1fr;
   }
 
-  .profile-container {
-    flex-direction: column;
-    text-align: center;
+  .profile-info{
+    flex:1 1 100%;
+    min-width: 0;
+  }
+
+  .profile-info p {
+    text-align: left;
   }
 
   .profile-image-container {

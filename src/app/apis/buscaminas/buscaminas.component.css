@@ -1,29 +1,125 @@
 .game-widget-container {
   background-color: var(--primary-color);
   border-radius: 20px;
-  box-shadow: 0 6px 16px var(--medium-dark-color);
-  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 25px;
   margin: 20px auto;
   max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .game-widget-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--medium-dark-color);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+.lives-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lives-label {
+  font-weight: 600;
+  color: var(--dark-color);
+  font-size: 1.1rem;
+}
+
+.lives-hearts {
+  display: flex;
+  gap: 4px;
+}
+
+.heart, .heart-lost {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.heart:hover {
+  transform: scale(1.1);
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, var(--complementary-color), var(--complementary-medium-dark));
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, var(--complementary-medium-dark), var(--complementary-medium-dark-hover));
+}
+
+.game-status {
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.status-message {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 12px;
+  animation: slideIn 0.5s ease-out;
+}
+
+.status-message.won {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  color: white;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.status-message.lost {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .game-widget-subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--dark-color);
   opacity: 0.8;
   text-align: center;
   margin-bottom: 20px;
   max-width: 600px;
+  line-height: 1.4;
 }
 
 .game-widget-content {
@@ -35,51 +131,131 @@
 
 .minesweeper-grid {
   display: grid;
-  grid-template-columns: repeat(8, 40px);
-  grid-gap: 5px;
+  grid-template-columns: repeat(8, 45px);
+  grid-gap: 3px;
   justify-content: center;
   margin: 20px 0;
+  padding: 15px;
+  background-color: var(--secondary-color);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .minesweeper-grid button {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border: 2px solid var(--medium-dark-color);
-  background-color: var(--primary-color);
-  font-size: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), #fff);
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+  user-select: none;
 }
 
-.minesweeper-grid button:hover {
-  background-color: var(--complementary-medium-dark-hover);
+.minesweeper-grid button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #fff, var(--primary-color));
+}
+
+.minesweeper-grid button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .minesweeper-grid button.revealed {
-  background-color: var(--secondary-color);
+  background: var(--secondary-color);
   cursor: default;
+  border-color: var(--complementary-medium-dark);
 }
 
 .minesweeper-grid button.mine {
-  background-color: #e03636;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
   color: white;
+  animation: mineExplode 0.5s ease-out;
+}
+
+.minesweeper-grid button.flagged {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-color: #d97706;
+}
+
+/* Colores para números */
+.minesweeper-grid button.number-1 { color: #0ea5e9; }
+.minesweeper-grid button.number-2 { color: #22c55e; }
+.minesweeper-grid button.number-3 { color: #ef4444; }
+.minesweeper-grid button.number-4 { color: #8b5cf6; }
+.minesweeper-grid button.number-5 { color: #f59e0b; }
+.minesweeper-grid button.number-6 { color: #ec4899; }
+.minesweeper-grid button.number-7 { color: #374151; }
+.minesweeper-grid button.number-8 { color: #7c2d12; }
+
+@keyframes mineExplode {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.minesweeper-grid button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .game-widget-container {
+    padding: 20px;
+  }
+
   .game-widget-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .game-info {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
   }
 
   .game-widget-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     padding: 0 10px;
   }
 
   .minesweeper-grid {
-    grid-template-columns: repeat(6, 36px);
-    grid-gap: 4px;
+    grid-template-columns: repeat(6, 40px);
+    grid-gap: 2px;
+    padding: 10px;
+  }
+
+  .minesweeper-grid button {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-widget-container {
+    padding: 15px;
+    margin: 15px;
+  }
+
+  .game-widget-title {
+    font-size: 1.4rem;
+  }
+
+  .game-widget-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .minesweeper-grid {
+    grid-template-columns: repeat(5, 36px);
+    grid-gap: 2px;
+    padding: 8px;
   }
 
   .minesweeper-grid button {
@@ -87,29 +263,21 @@
     height: 36px;
     font-size: 0.9rem;
   }
+
+  .status-message {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
 }
 
-@media (max-width: 480px) {
-  .game-widget-container {
-    padding: 15px;
-  }
-
-  .game-widget-title {
-    font-size: 1.3rem;
-  }
-
-  .game-widget-subtitle {
-    font-size: 0.9rem;
-  }
-
+@media (max-width: 360px) {
   .minesweeper-grid {
-    grid-template-columns: repeat(5, 34px);
-    grid-gap: 4px;
+    grid-template-columns: repeat(4, 34px);
   }
 
   .minesweeper-grid button {
     width: 34px;
     height: 34px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 }
